@@ -25,10 +25,10 @@
                     <a aria-current="page" href="/posts">Posts</a>
                   </li>
                   <li class="nav-item">
-                    <a  href="users/{{session.user.id}}">View Profile</a>
+                    <a  href="/users/{{session.user.id}}" id="view-profile">View Profile</a>
                   </li>
                   <li class="nav-item">
-                    <a  href="/users/{{session.user.id}}/edit">Edit Profile</a>
+                    <a  href="/users/{{session.user.id}}/edit" id="edit-profile">Edit Profile</a>
                   </li>
                   <li class="nav-item">
                     <a  href="/sessions/delete" id="logout">Logout</a>

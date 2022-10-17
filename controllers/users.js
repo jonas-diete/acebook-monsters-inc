@@ -38,6 +38,14 @@ const UsersController = {
       res.render("users/new", {layout: false, error: errorMessage});
     }
   },
+
+  // View: (req, res) => {
+
+  // },
+
+  // Edit: (req, res) => {
+
+  // },
 };
 
 module.exports = UsersController;
