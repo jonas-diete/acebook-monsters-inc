@@ -5,7 +5,7 @@ const UsersController = require("../controllers/users");
 
 router.get("/new", UsersController.New);
 router.post("/new", UsersController.Create);
-// router.get("/:id", UsersController.View);
-// router.get("/:id/edit", UsersController.Edit);
+// router.get("/account", UsersController.View);
+
 
 module.exports = router;

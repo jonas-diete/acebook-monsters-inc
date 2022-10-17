@@ -1,5 +1,5 @@
-describe("Profile Page", () => {
-    it("can view their profile page when signed in", () => {
+describe("Account Page", () => {
+    it("can view their account page when signed in", () => {
         // sign up
         cy.visit("/users/new");
         cy.get("#name").type("name");
@@ -10,7 +10,7 @@ describe("Profile Page", () => {
 
         //view the profile page
         cy.contains("#logout", "Logout");
-        cy.get("#view-profile").click();
+        cy.get("#account").click();
         
     });
 });
