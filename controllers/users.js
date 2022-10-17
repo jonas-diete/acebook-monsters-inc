@@ -1,4 +1,5 @@
- const User = require("../models/user");
+const session = require("express-session");
+const User = require("../models/user");
 
 const UsersController = {
   New: (req, res) => {
@@ -39,13 +40,11 @@ const UsersController = {
     }
   },
 
-  // View: (req, res) => {
+  View: (req, res) => {
 
-  // },
+    res.render("users/account", {session: req.session});
+  },
 
-  // Edit: (req, res) => {
-
-  // },
 };
 
 module.exports = UsersController;
