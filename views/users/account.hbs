@@ -1,28 +1,75 @@
 <div>
     <h1>My Account</h1>
-    <div class="post">
-    <div class="post-header"> 
+    <div class="account">
+        <div class="account-info d-flex justify-content-around">
+            <div class="post p-2">
+                <div class="post-header">
 
-        <!-- If we use /image/filename.png it works for files on thr 
-        database but not image links, so we need to make the default image a file stored in the database aswell -->
-        <img class="profile_picture" src="/images/{{session.user.photo_link}}" alt="profile_picture">
-        <!-- make form to upload photo -->
-        <!-- /users/account/image -->
-        <form action="/users/account/image" method="POST" enctype="multipart/form-data">
-            <div>
-                <input id="image-selector" type="file" name="image" 
-                    value="Post" accept=".png, .jpeg, .jpg, .gif">
-                <label for="image-selector"></label>
-                <button class="pink-button" id="submit" type="submit" style="display:none">Submit</button>
+                    <!-- If we use /image/filename.png it works for files on thr 
+                database but not image links, so we need to make the default image a file stored in the database aswell -->
+                    <img class="profile_picture" src="/images/{{session.user.photo_link}}" alt="profile_picture">
+                    <!-- make form to upload photo -->
+                    <!-- /users/account/image -->
+                    <form id="change-profile-pic" action="/users/account/image" method="POST" enctype="multipart/form-data">
+                        <div>
+                            <input id="image-selector" type="file" name="image" value="Post" accept=".png, .jpeg, .jpg, .gif">
+                            <button class="pink-button" id="submit" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="account-name">{{session.user.name}}</div>
             </div>
-        </form>
-    </div>
-    {{session.user.name}}
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>                
-    $("#image-selector").on("change", function(){
-        $("#submit").show();
-    })
-</script>
+        </div>
+        <div class="posts p-2">
+            {{#each posts}}
+            <div class="post">
+                <div class="post-header">
+                    <img class="profile_picture" src="/images/{{this.photo_link}}" alt="profile_picture">
+                    {{this.name}} - {{this.date_string}}
+                </div>
+                {{#if this.image}}
+                <img src="/images/{{this.image}}" class="postImage" alt="">
+                {{/if}}
+                <div class="post-message">
+                    <!-- create a like button and the number of likes -->
+                    <form method="POST" action="/posts/like">
+                        <input type="hidden" value="{{this._id}}" name="postId">
+                        <input type="hidden" value="{{../session.user._id}}" name="userId">
+                        {{this.message}}
+                        <input type="submit" value="" id="like-button">
+                        {{#if this.likes}}
+                        <span id="like-number">{{this.likes.length}}</span>
+                        {{/if}}
+                    </form>
+                </div>
 
+                {{#if this.owner}}
+                <!-- Delete a post -->
+                <form id="delete-post-form" action="/posts/delete/{{this._id}}" method="post">
+                    <input type="submit" value="Delete">
+                </form>
+                {{/if}}
+                <!-- create a comment on the post -->
+                <form id="new-comment-form" action="/posts/{{this._id}}" method="post">
+                    <input id="message" type="text" name="message" value="" placeholder="Comment here">
+                    <input type="submit" value="Submit">
+                </form>
+                {{#each this.comments}}
+                <div class="comment">{{this.name}} - {{this.message}} - {{this.createdAt}}</div>
+                {{#if this.comment_owner}}
+                <!-- Delete a comment -->
+                <form id="delete-comment-form" action="/posts/comment/delete/{{this.post_id}}/{{this._id}}" method="post">
+                    <input type="submit" value="Delete">
+                </form>
+                {{/if}}
+                {{/each}}
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $("#image-selector").on("change", function () {
+            $("#submit").show();
+        })
+    </script>

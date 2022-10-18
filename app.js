@@ -66,7 +66,7 @@ const sessionChecker = (req, res, next) => {
 app.use(bodyParser.json());
 
 // Mongo URI test or development
-const mongoDbUrl = process.env.MONGODB_URL || "mongodb://0.0.0.0/acebook";
+const mongoDbUrl = process.env.MONGODB_URL || "mongodb://0.0.0.0/acebook_test";
 const conn = mongoose.createConnection(mongoDbUrl);
 
 // Init gfs for streaming images
@@ -83,19 +83,19 @@ conn.once("open", () => {
 const storage = new GridFsStorage({
   url: "mongodb://127.0.0.1/acebook",
   file: (req, file) => {
-      return new Promise((resolve, reject) => {
-        crypto.randomBytes(16, (err, buf) => {
-          if (err) {
-            return reject(err);
-          }
-          const filename = buf.toString("hex") + path.extname(file.originalname);
-          const fileInfo = {
-            filename: filename,
-            bucketName: "uploads",
-          };
-          resolve(fileInfo);
-        });
+    return new Promise((resolve, reject) => {
+      crypto.randomBytes(16, (err, buf) => {
+        if (err) {
+          return reject(err);
+        }
+        const filename = buf.toString("hex") + path.extname(file.originalname);
+        const fileInfo = {
+          filename: filename,
+          bucketName: "uploads",
+        };
+        resolve(fileInfo);
       });
+    });
   },
 });
 
@@ -107,7 +107,7 @@ app.use("/", homeRouter);
 app.use("/images", imagesRouter);
 app.use("/posts", sessionChecker, upload.single("image"), postsRouter);
 app.use("/sessions", sessionsRouter);
-app.use("/users", sessionChecker, upload.single("image"), usersRouter);
+app.use("/users", upload.single("image"), usersRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
