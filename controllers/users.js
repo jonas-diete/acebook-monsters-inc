@@ -26,7 +26,7 @@ const UsersController = {
             user.save((err) => {
             if (err) {
               errorMessage = "Email already exists."
-              res.render("users/new", {layout: false, error: errorMessage});
+              res.render("users/new", {error: errorMessage});
               // throw err;
             } else {
               req.session.user = user;
