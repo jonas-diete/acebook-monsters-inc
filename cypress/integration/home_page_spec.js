@@ -1,7 +1,7 @@
 describe("Home page", () => {
   it("has a title", () => {
-    cy.visit("/");
-    cy.get(".title").should("contain", "Acebook");
-    cy.contains("a", "Sign Up");
+    cy.visit("/sessions/new");
+    cy.get("title").should("contain", "login");
+    cy.contains("h1", "Welcome to AceBook");
   });
 });
