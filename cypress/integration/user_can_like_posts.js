@@ -41,7 +41,7 @@ describe('Liking', () => {
     //click like button again
     cy.get("#like-button").click();
 
-    cy.contains("#like-number", '0');
+    cy.get("#like-number").should('not.contain','0');
   });
 
   it('likes someone elses posts', () => {
