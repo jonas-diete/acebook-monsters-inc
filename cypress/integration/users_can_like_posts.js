@@ -44,6 +44,26 @@ describe("Liking", () => {
     cy.contains("#like-number", "1");
   });
 
+  it("likes a posts", () => {
+    // sign up
+    cy.visit("/users/new");
+    cy.get("#name").type("name");
+    cy.get("#email").type("someone1@example.com");
+    cy.get("#password1").type("Password@1");
+    cy.get("#password2").type("Password@1");
+    cy.get("#submit").click();
+
+    //create post
+    cy.contains("#logout", "Logout");
+    cy.get("#new-post-form").find('[type="text"]').type("Hello, world!");
+    cy.get("#new-post-form").submit();
+
+    //click like button
+    cy.get("#like-button").click();
+
+    cy.contains("#like-number", "1");
+  });
+
   it("likes someone elses posts", () => {
     // sign up
     cy.visit("/users/new");
