@@ -1,10 +1,17 @@
-<!-- nav bar with Timeline and Logout -->
 <div>
     <h1>My Account</h1>
     <div class="post">
     <div class="post-header"> 
         <img class="profile_picture" src="{{session.user.photo_link}}" alt="profile_picture">
-        {{session.user.name}}
+        <!-- make form to upload photo -->
+        <!-- /users/account/image -->
+        <form action="/users/account/image" method="POST" enctype="multipart/form-data">
+            <div>
+                <input id="image-selector" type="file" name="image" 
+                    value="Post" accept=".png, .jpeg, .jpg, .gif">
+            </div>
+        </form>
     </div>
+    {{session.user.name}}
 </div>
 
