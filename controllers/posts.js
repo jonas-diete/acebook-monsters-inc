@@ -7,25 +7,34 @@ const PostsController = {
       if (err) {
         throw err;
       }
+      
+      posts.forEach((post) => {
+        post.owner = req.session.user._id == post.user_id;
+        post.comments.forEach((comment) => {
+          comment.comment_owner = req.session.user._id == comment.user_id;
+        });
+      });
+
       res.render("posts/index", {
         posts: posts,
         session: req.session,
       });
     }).sort({ createdAt: -1 });
   },
-  // New: (req, res) => {
-  //   res.render("posts/new", {session: req.session});
-  // },
+
   Create: (req, res) => {
     const post = new Post();
     post.name = req.session.user.name;
     post.message = req.body.message;
     post.photo_link = req.session.user.photo_link;
+    if (req.file) {
+      post.image = req.file.filename;
+    }
     const date = new Date();
     post.date_string = `${date.getDate()}-${
       date.getMonth() + 1
     }-${date.getFullYear()} ${date.toLocaleTimeString()}`;
-
+    post.user_id = req.session.user._id;
     post.save((err) => {
       if (err) {
         throw err;
@@ -75,6 +84,8 @@ const PostsController = {
       comment.createdAt = `${date.getDate()}-${
         date.getMonth() + 1
       }-${date.getFullYear()} ${date.toLocaleTimeString()}`;
+      comment.user_id = req.session.user._id;
+      comment.post_id = req.params.id;
       post.comments.unshift(comment);
       post.save((err) => {
         if (err) {
@@ -84,6 +95,35 @@ const PostsController = {
       });
     });
   },
+
+  DeletePost: (req, res) => {
+    Post.findOneAndDelete({_id: req.params.id}, (err)=> {
+      if (err) {
+        throw err;
+      }
+      res.status(201).redirect("/posts");
+    })
+  },
+
+  DeleteComment: (req, res) => {
+    Post.findById(req.params.id, (err, post) => {
+      if (err) {
+        throw err;
+      }
+      for(let i=0; i< post.comments.length; i++){
+        if(post.comments[i]._id == req.params.commentId){
+          post.comments.splice(i, 1);
+        }
+      }
+      post.save((err) => {
+        if (err) {
+          throw err;
+        }
+     
+      res.status(201).redirect("/posts");
+    });
+  });
+}
 };
 
 module.exports = PostsController;
