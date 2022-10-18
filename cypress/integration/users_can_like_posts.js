@@ -3,7 +3,7 @@ describe("Liking", () => {
     // sign up
     cy.visit("/users/new");
     cy.get("#name").type("name");
-    cy.get("#email").type("someone2@example.com");
+    cy.get("#email").type("someone1@example.com");
     cy.get("#password1").type("Password@1");
     cy.get("#password2").type("Password@1");
     cy.get("#submit").click();
@@ -28,7 +28,7 @@ describe("Liking", () => {
     // sign up
     cy.visit("/users/new");
     cy.get("#name").type("name");
-    cy.get("#email").type("someone1@example.com");
+    cy.get("#email").type("someone2@example.com");
     cy.get("#password1").type("Password@1");
     cy.get("#password2").type("Password@1");
     cy.get("#submit").click();
@@ -48,7 +48,7 @@ describe("Liking", () => {
     // sign up
     cy.visit("/users/new");
     cy.get("#name").type("name");
-    cy.get("#email").type("someone1@example.com");
+    cy.get("#email").type("someone3@example.com");
     cy.get("#password1").type("Password@1");
     cy.get("#password2").type("Password@1");
     cy.get("#submit").click();
@@ -68,7 +68,7 @@ describe("Liking", () => {
     // sign up
     cy.visit("/users/new");
     cy.get("#name").type("name");
-    cy.get("#email").type("someone3@example.com");
+    cy.get("#email").type("someone4@example.com");
     cy.get("#password1").type("Password@1");
     cy.get("#password2").type("Password@1");
     cy.get("#submit").click();
@@ -89,7 +89,7 @@ describe("Liking", () => {
     // sign up
     cy.visit("/users/new");
     cy.get("#name").type("name");
-    cy.get("#email").type("someone4@example.com");
+    cy.get("#email").type("someone5@example.com");
     cy.get("#password1").type("Password@1");
     cy.get("#password2").type("Password@1");
     cy.get("#submit").click();
