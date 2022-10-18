@@ -41,10 +41,25 @@ const UsersController = {
   },
 
   View: (req, res) => {
-
     res.render("users/account", {session: req.session});
   },
 
+  Image: (req, res) => {
+    // req now has .file attached to it, 
+    // so we can take the file.filename < - which is unique and save it as the profilepic thing
+
+    // find a user by id in mongodb
+    User.findById(req.session.user._id, (err, user) => {
+      user.photo_link = req.file.filename
+      req.session.user.photo_link = req.file.filename
+      user.save((err)=> {
+        if (err) {
+          throw err;
+        }
+        res.status(201).redirect("/users/account")
+      }) 
+    })
+  },
 };
 
 module.exports = UsersController;

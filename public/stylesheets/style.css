@@ -98,6 +98,17 @@ footer {
   margin: 5px 10px 5px 15px;
 }
 
+.pink-button {
+  background-color: rgb(150, 38, 160);
+  border: 3px solid rgb(236, 122, 247);
+  border-radius: 10px;
+  color: white;
+  width: 500px;
+  margin: 20px auto;
+  padding: 15px 20px;
+  font-size: 25px;
+}
+
 #image-selector::file-selector-button:hover, #image-selector::file-selector-button:active {
   background-color: rgb(94, 21, 101);
   border: 3px solid rgb(236, 122, 247);
