@@ -7,7 +7,7 @@ const PostsController = {
       if (err) {
         throw err;
       }
-      
+
       posts.forEach((post) => {
         post.owner = req.session.user._id == post.user_id;
         post.comments.forEach((comment) => {
@@ -97,12 +97,12 @@ const PostsController = {
   },
 
   DeletePost: (req, res) => {
-    Post.findOneAndDelete({_id: req.params.id}, (err)=> {
+    Post.findOneAndDelete({ _id: req.params.id }, (err) => {
       if (err) {
         throw err;
       }
       res.status(201).redirect("/posts");
-    })
+    });
   },
 
   DeleteComment: (req, res) => {
@@ -110,8 +110,8 @@ const PostsController = {
       if (err) {
         throw err;
       }
-      for(let i=0; i< post.comments.length; i++){
-        if(post.comments[i]._id == req.params.commentId){
+      for (let i = 0; i < post.comments.length; i++) {
+        if (post.comments[i]._id == req.params.commentId) {
           post.comments.splice(i, 1);
         }
       }
@@ -119,11 +119,11 @@ const PostsController = {
         if (err) {
           throw err;
         }
-     
-      res.status(201).redirect("/posts");
+
+        res.status(201).redirect("/posts");
+      });
     });
-  });
-}
+  },
 };
 
 module.exports = PostsController;
