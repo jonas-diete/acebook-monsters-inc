@@ -13,13 +13,13 @@ const SessionsController = {
     User.findOne({ email: email }).then((user) => {
 
       if (!user) {
-        res.render("sessions/new", {layout: false, message: "Invalid details", session: req.session});
+        res.render("sessions/new", {message: "Invalid details", session: req.session});
       } else {bcrypt.compare(password, user.password, (err, result) => {
             if (err) {
               throw err;
             }
             if (result === false) {
-              res.render("sessions/new", {layout: false, message: "Invalid details", session: req.session});
+              res.render("sessions/new", {message: "Invalid details", session: req.session});
             } else {
               req.session.user = user;
               res.redirect("/posts");
