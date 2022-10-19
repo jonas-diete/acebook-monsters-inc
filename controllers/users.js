@@ -85,6 +85,7 @@ const UsersController = {
         if (err) {
           throw err;
         }
+        
         res.render("users/publicAccount", {
           currentAccount: user,
           session: req.session,
@@ -127,7 +128,13 @@ const UsersController = {
 
     // Saving the new friend's id in our friend-array
     User.findById(req.session.user._id, (err, user) => {
-      user.friends.push(req.body.friend_id);
+
+      let friendObject = {
+        name: req.body.friend_name,
+        id: req.body.friend_id
+      }
+
+      user.friends.push(friendObject);
       user.save((err) => {
         if (err) {
           throw err;
@@ -137,7 +144,13 @@ const UsersController = {
 
     // Saving our id into our new friend's friend-array
     User.findById(req.body.friend_id, (err, user) => {
-      user.friends.push(req.session.user._id);
+
+      let friendObject = {
+        name: req.session.user.name,
+        id: req.session.user._id
+      }
+
+      user.friends.push(friendObject);
       user.save((err) => {
         if (err){
           throw err;
