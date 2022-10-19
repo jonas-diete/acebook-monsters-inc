@@ -1,0 +1,50 @@
+<div>
+    <h1>{{currentAccount.name}}'s Account</h1>
+    <div class="account">
+        <div class="posts p-2">
+            {{#each posts}}
+            <div class="post">
+                <div class="post-header">
+                    <img class="profile_picture" src="/images/{{this.photo_link}}" alt="profile_picture">
+                    {{this.name}} - {{this.date_string}}
+                </div>
+                {{#if this.image}}
+                <img src="/images/{{this.image}}" class="postImage" alt="">
+                {{/if}}
+                <div class="post-message">
+                    <!-- create a like button and the number of likes -->
+                    <form method="POST" action="/posts/like">
+                        <input type="hidden" value="{{this._id}}" name="postId">
+                        <input type="hidden" value="{{../session.user._id}}" name="userId">
+                        {{this.message}}
+                        <input type="submit" value="" id="like-button">
+                        {{#if this.likes}}
+                        <span id="like-number">{{this.likes.length}}</span>
+                        {{/if}}
+                    </form>
+                </div>
+
+                {{#if this.owner}}
+                <!-- Delete a post -->
+                <form id="delete-post-form" action="/posts/delete/{{this._id}}" method="post">
+                    <input type="submit" value="Delete">
+                </form>
+                {{/if}}
+                <!-- create a comment on the post -->
+                <form id="new-comment-form" action="/posts/{{this._id}}" method="post">
+                    <input id="message" type="text" name="message" value="" placeholder="Comment here">
+                    <input type="submit" value="Submit">
+                </form>
+                {{#each this.comments}}
+                <div class="comment">{{this.name}} - {{this.message}} - {{this.createdAt}}</div>
+                {{#if this.comment_owner}}
+                <!-- Delete a comment -->
+                <form id="delete-comment-form" action="/posts/comment/delete/{{this.post_id}}/{{this._id}}" method="post">
+                    <input type="submit" value="Delete">
+                </form>
+                {{/if}}
+                {{/each}}
+            </div>
+            {{/each}}
+        </div>
+    </div>
