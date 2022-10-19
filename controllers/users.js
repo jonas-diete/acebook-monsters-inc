@@ -85,11 +85,19 @@ const UsersController = {
         if (err) {
           throw err;
         }
-        
+
+        let isNoFriend = true;
+        req.session.user.friends.forEach((friend) => {
+          if (friend.id == user._id  || req.session.user._id == user._id) {
+            isNoFriend = false;
+          } 
+        })
+  
         res.render("users/publicAccount", {
           currentAccount: user,
           session: req.session,
           posts: posts,
+          isNoFriend: isNoFriend
         });
       });
     }).sort({ createdAt: -1 });
@@ -121,11 +129,26 @@ const UsersController = {
     });
   },
 
+  RequestFriend: (req, res) => {
+    User.findById(req.body.friend_id, (err, user) => {
+      let requestedFriendObject = {
+        name: req.session.user.name,
+        id: req.session.user._id
+      }
+      user.friendRequests.push(requestedFriendObject);
+      user.save((err) => {
+        if (err) {
+          throw err;
+        }
+      })
+    })
+    res.status(201).redirect("/users/"+ req.body.friend_id);
+  },
+
+  
+
   // assumes we are getting the id of the user who we want to be friends with as req.body.user_id
   AddFriend: (req, res) => {
-    console.log(req.session.user._id);
-    console.log(req.body.friend_id);
-
     // Saving the new friend's id in our friend-array
     User.findById(req.session.user._id, (err, user) => {
 
@@ -135,6 +158,15 @@ const UsersController = {
       }
 
       user.friends.push(friendObject);
+
+      console.log(user.friendRequests);
+
+      for (let i = 0; i < user.friendRequests.length; i++){
+        if (user.friendRequests[i].id === req.body.friend_id){
+          user.friendRequests.splice(i, 1);
+        }
+      }
+
       user.save((err) => {
         if (err) {
           throw err;

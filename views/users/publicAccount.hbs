@@ -1,16 +1,31 @@
 <div>
     <h1>{{currentAccount.name}}'s Account</h1>
     <div class="account">
+      {{#if isNoFriend}}
         <form method="POST" action="/users/request-friend">
             <input id="friend_id" type="hidden" value="{{currentAccount._id}}" name="friend_id">
-            <input id="friend_name" type="hidden" value="{{currentAccount.name}}" name="friend_name">
-            <input type="submit" value="Add Friend">
+            <input type="submit" value="Request Friend">
         </form>
+      {{/if}}
         <br>
         <h3>Friends List:</h3>
         {{#each currentAccount.friends}}
         <div>
            <a href="/users/{{this.id}}" >{{this.name}}</a>
+        </div>
+        {{/each}}
+        <br>       
+        {{#each currentAccount.friendRequests}}
+        <div>
+           <a href="/users/{{this.id}}" >{{this.name}}</a> has requested to be your friend!
+           <form method="POST" action="/users/accept-friend-request">
+                <input id="friend_id" type="hidden" value="{{this.id}}" name="friend_id">
+                <input id="friend_name" type="hidden" value="{{this.name}}" name="friend_name">
+                <input type="submit" value="Accept">
+           </form>
+            <form>
+                <input type="submit" value="Decline" method="POST" action="/users/decline-friend-request">
+           </form>
         </div>
         {{/each}}
 
