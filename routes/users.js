@@ -8,5 +8,6 @@ router.post("/new", UsersController.Create);
 router.get("/account", UsersController.ProfileIndex);
 router.post("/account/image", UsersController.Image);
 router.get("/:id", UsersController.PublicIndex);
+router.post("/request-friend", UsersController.AddFriend);
 
 module.exports = router;

@@ -119,6 +119,33 @@ const UsersController = {
       });
     });
   },
+
+  // assumes we are getting the id of the user who we want to be friends with as req.body.user_id
+  AddFriend: (req, res) => {
+    console.log(req.session.user._id);
+    console.log(req.body.friend_id);
+
+    // Saving the new friend's id in our friend-array
+    User.findById(req.session.user._id, (err, user) => {
+      user.friends.push(req.body.friend_id);
+      user.save((err) => {
+        if (err) {
+          throw err;
+        }
+      })
+    })
+
+    // Saving our id into our new friend's friend-array
+    User.findById(req.body.friend_id, (err, user) => {
+      user.friends.push(req.session.user._id);
+      user.save((err) => {
+        if (err){
+          throw err;
+        }
+      })
+    })
+    res.status(201).redirect("/posts");
+  },
 };
 
 module.exports = UsersController;

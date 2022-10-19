@@ -1,6 +1,10 @@
 <div>
     <h1>{{currentAccount.name}}'s Account</h1>
     <div class="account">
+        <form method="POST" action="/users/request-friend">
+            <input type="hidden" value="{{currentAccount._id}}" name="friend_id">
+            <input type="submit" value="Add Friend">
+        </form>
         <div class="posts p-2">
             {{#each posts}}
             <div class="post">
