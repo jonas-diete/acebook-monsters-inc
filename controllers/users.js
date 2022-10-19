@@ -51,11 +51,10 @@ const UsersController = {
   },
 
   ProfileIndex: (req, res) => {
-    Post.find({user_id: req.session.user._id}, (err, posts) => {
+    Post.find({ user_id: req.session.user._id }, (err, posts) => {
       if (err) {
         throw err;
       }
-
       posts.forEach((post) => {
         post.owner = req.session.user._id == post.user_id;
         post.comments.forEach((comment) => {
@@ -67,6 +66,30 @@ const UsersController = {
         title: "Profile page",
         session: req.session,
         posts: posts,
+      });
+    }).sort({ createdAt: -1 });
+  },
+
+  PublicIndex: (req, res) => {
+    Post.find({ user_id: req.params.id }, (err, posts) => {
+      if (err) {
+        throw err;
+      }
+      posts.forEach((post) => {
+        post.owner = req.session.user._id == post.user_id;
+        post.comments.forEach((comment) => {
+          comment.comment_owner = req.session.user._id == comment.user_id;
+        });
+      });
+      User.findById(req.params.id, (err, user) => {
+        if (err) {
+          throw err;
+        }
+        res.render("users/publicAccount", {
+          currentAccount: user,
+          session: req.session,
+          posts: posts,
+        });
       });
     }).sort({ createdAt: -1 });
   },
