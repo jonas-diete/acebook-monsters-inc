@@ -12,7 +12,6 @@ const UsersController = {
     let errorMessage = "";
     user.name = req.body.name;
     user.email = req.body.email;
-
     if (req.body.password1 === req.body.password2) {
       let plainPassword = req.body.password1;
       let passwordRegex =
@@ -51,7 +50,7 @@ const UsersController = {
   },
 
   ProfileIndex: (req, res) => {
-    Post.find({ user_id: req.session.user._id }, (err, posts) => {
+    Post.find({ posted_on: req.session.user._id }, (err, posts) => {
       if (err) {
         throw err;
       }
@@ -71,7 +70,7 @@ const UsersController = {
   },
 
   PublicIndex: (req, res) => {
-    Post.find({ user_id: req.params.id }, (err, posts) => {
+    Post.find({ posted_on: req.params.id }, (err, posts) => {
       if (err) {
         throw err;
       }
@@ -98,12 +97,12 @@ const UsersController = {
     // find a user by id in mongodb
     User.findById(req.session.user._id, (err, user) => {
       // change the image property of the user in database and session
-      user.photo_link = req.file.filename;
-      req.session.user.photo_link = req.file.filename;
+      user.photo_link = `/images/${req.file.filename}`;
+      req.session.user.photo_link = `/images/${req.file.filename}`;
       // find and change the image property of all posts by that user
       Post.find({ user_id: req.session.user._id }, (err, posts) => {
         posts.forEach((post) => {
-          post.photo_link = req.file.filename;
+          post.photo_link = `/images/${req.file.filename}`;
           post.save((err) => {
             if (err) {
               throw err;

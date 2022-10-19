@@ -10,7 +10,8 @@ const PostSchema = new mongoose.Schema(
     image: String,
     date_string: String,
     fileStorage: Array,
-    user_id: mongoose.Schema.Types.ObjectId
+    user_id: String,
+    posted_on: String,
   },
   { timestamps: true }
 );
