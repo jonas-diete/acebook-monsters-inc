@@ -62,11 +62,26 @@ const UsersController = {
         });
       });
 
-      res.render("users/account", {
-        title: "Profile page",
-        session: req.session,
-        posts: posts,
-      });
+      // User.findById(req.session.user._id, (err, user) => {
+      //   if (err) {
+      //     throw err;
+      //   }
+
+        let notRequestedFriendship = true;
+        console.log(req.session.user.friendRequests.length);
+        if (req.session.user.friendRequests.length == 0){
+          notRequestedFriendship = false;
+        }
+      
+        res.render("users/account", {
+          title: "Profile page",
+          session: req.session,
+          posts: posts,
+          notRequestedFriendship: notRequestedFriendship
+        });
+      // })
+
+      
     }).sort({ createdAt: -1 });
   },
 
@@ -89,6 +104,12 @@ const UsersController = {
         let isNoFriend = true;
         req.session.user.friends.forEach((friend) => {
           if (friend.id == user._id  || req.session.user._id == user._id) {
+            isNoFriend = false;
+          } 
+        })
+
+        user.friendRequests.forEach((friend) => {
+          if (friend.id == req.session.user._id) {
             isNoFriend = false;
           } 
         })
@@ -159,8 +180,6 @@ const UsersController = {
 
       user.friends.push(friendObject);
 
-      console.log(user.friendRequests);
-
       for (let i = 0; i < user.friendRequests.length; i++){
         if (user.friendRequests[i].id === req.body.friend_id){
           user.friendRequests.splice(i, 1);
@@ -191,6 +210,23 @@ const UsersController = {
     })
     res.status(201).redirect("/posts");
   },
+
+  DeclineFriend: (req, res) =>{
+    User.findById(req.session.user._id, (err, user) => {
+      
+      for (let i = 0; i < user.friendRequests.length; i++){
+        if (user.friendRequests[i].id === req.body.friend_id){
+          user.friendRequests.splice(i, 1);
+        }
+      }
+      user.save((err) => {
+        if (err){
+          throw err;
+        }
+      })
+    })
+    res.status(201).redirect("/users/account");
+  }
 };
 
 module.exports = UsersController;

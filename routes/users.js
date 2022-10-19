@@ -10,6 +10,6 @@ router.post("/account/image", UsersController.Image);
 router.get("/:id", UsersController.PublicIndex);
 router.post("/request-friend", UsersController.RequestFriend);
 router.post("/accept-friend-request", UsersController.AddFriend);
-// router.post("/decline-friend-request", UsersController.DeclineFriend);
+router.post("/decline-friend-request", UsersController.DeclineFriend);
 
 module.exports = router;

@@ -13,22 +13,7 @@
         <div>
            <a href="/users/{{this.id}}" >{{this.name}}</a>
         </div>
-        {{/each}}
-        <br>       
-        {{#each currentAccount.friendRequests}}
-        <div>
-           <a href="/users/{{this.id}}" >{{this.name}}</a> has requested to be your friend!
-           <form method="POST" action="/users/accept-friend-request">
-                <input id="friend_id" type="hidden" value="{{this.id}}" name="friend_id">
-                <input id="friend_name" type="hidden" value="{{this.name}}" name="friend_name">
-                <input type="submit" value="Accept">
-           </form>
-            <form>
-                <input type="submit" value="Decline" method="POST" action="/users/decline-friend-request">
-           </form>
-        </div>
-        {{/each}}
-
+        {{/each}}      
         <div class="posts p-2">
             {{#each posts}}
             <div class="post">
