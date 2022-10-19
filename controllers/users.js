@@ -51,11 +51,10 @@ const UsersController = {
   },
 
   ProfileIndex: (req, res) => {
-    Post.find((err, posts) => {
+    Post.find({ user_id: req.session.user._id }, (err, posts) => {
       if (err) {
         throw err;
       }
-
       posts.forEach((post) => {
         post.owner = req.session.user._id == post.user_id;
         post.comments.forEach((comment) => {
