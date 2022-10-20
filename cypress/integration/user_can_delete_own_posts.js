@@ -14,7 +14,7 @@ describe('Post deletion', () => {
         
       // delete post
       cy.get("#delete-post-form").click();
-      cy.get(".post").eq(0);
+      cy.get(".post").should('not.exist');
 
     });
 
