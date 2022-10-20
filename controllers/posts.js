@@ -3,7 +3,7 @@ const Comment = require("../models/comment");
 
 const PostsController = {
   Index: (req, res) => {
-    Post.find((err, posts) => {
+    Post.find({ $expr: { $eq: ["$posted_on", "$user_id"] } }, (err, posts) => {
       if (err) {
         throw err;
       }
@@ -27,20 +27,25 @@ const PostsController = {
     post.name = req.session.user.name;
     post.message = req.body.message;
     post.photo_link = req.session.user.photo_link;
+    post.user_id = req.session.user._id;
+    if (req.params.id) {
+      post.posted_on = req.params.id;
+    } else {
+      post.posted_on = req.session.user._id;
+    }
     if (req.file) {
-      post.image = req.file.filename;
+      post.image = `/images/${req.file.filename}`;
     }
     const date = new Date();
     post.date_string = `${date.getDate()}-${
       date.getMonth() + 1
     }-${date.getFullYear()} ${date.toLocaleTimeString()}`;
-    post.user_id = req.session.user._id;
     post.save((err) => {
       if (err) {
         throw err;
       }
-
-      res.status(201).redirect("/posts");
+      //redirect to the current page
+      res.status(201).redirect("back");
     });
   },
   Like: (req, res) => {
@@ -67,7 +72,7 @@ const PostsController = {
         if (err) {
           throw err;
         }
-        res.status(201).redirect("/posts");
+        res.status(201).redirect("back");
       });
     });
   },
@@ -91,7 +96,7 @@ const PostsController = {
         if (err) {
           throw err;
         }
-        res.status(201).redirect("/posts");
+        res.status(201).redirect("back");
       });
     });
   },
@@ -101,7 +106,7 @@ const PostsController = {
       if (err) {
         throw err;
       }
-      res.status(201).redirect("/posts");
+      res.status(201).redirect("back");
     });
   },
 
@@ -120,7 +125,7 @@ const PostsController = {
           throw err;
         }
 
-        res.status(201).redirect("/posts");
+        res.status(201).redirect("back");
       });
     });
   },
