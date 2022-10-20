@@ -11,7 +11,7 @@
         <h3>Friends List:</h3>
         {{#each currentAccount.friends}}
         <div>
-           <a href="/users/{{this.id}}" >{{this.name}}</a>
+           <a class="friend" href="/users/{{this.id}}" >{{this.name}}</a>
         </div>
         {{/each}}      
         <div class="posts p-2">
