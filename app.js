@@ -66,7 +66,9 @@ const sessionChecker = (req, res, next) => {
 app.use(bodyParser.json());
 
 // Mongo URI test or development
-const mongoDbUrl = process.env.MONGODB_URL || "mongodb://0.0.0.0/acebook";
+const mongoDbUrl =
+  process.env.MONGODB_URL ||
+  "mongodb+srv://monstersinc:WeAreAllMonsters@cluster0.y9bq9lw.mongodb.net/?retryWrites=true&w=majority";
 const conn = mongoose.createConnection(mongoDbUrl);
 
 // Init gfs for streaming images
