@@ -63,7 +63,7 @@
                         <div class="col-10 col-sm-11">
                             <div class="comment">{{this.name}} - {{this.message}} - {{this.createdAt}}</div>
                         </div>
-                        <div class="col-1" style="margin-left: -20px;">
+                        <div class="col-1" style="margin-left: -5px;">
                         {{#if this.comment_owner}}
                             <!-- Delete a comment -->
                             <form id="delete-comment-form" action="/posts/comment/delete/{{this.post_id}}/{{this._id}}" method="post">
