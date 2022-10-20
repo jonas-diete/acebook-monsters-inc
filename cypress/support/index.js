@@ -15,7 +15,6 @@
 
 // Import commands.js using ES2015 syntax:
 // import './commands'
-before(async () => {});
 // Alternatively you can use CommonJS syntax:
 beforeEach(async () => {
   // This runs prior to every test and clears all the data
