@@ -4,7 +4,7 @@
       {{#if isNoFriend}}
         <form method="POST" action="/users/request-friend">
             <input id="friend_id" type="hidden" value="{{currentAccount._id}}" name="friend_id">
-            <input type="submit" value="Request Friend">
+            <input id="friend-request-btn" type="submit" value="Request Friend">
         </form>
       {{/if}}
         <br>

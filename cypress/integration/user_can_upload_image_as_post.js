@@ -22,8 +22,6 @@ describe("Timeline", () => {
     cy.get("#submit").click();
 
     // submit a post
-
-    // cy.visit("/posts");
     cy.get("#new-post-form").find('[type="text"]').type("Hello, world!");
     cy.get("#image-selector").selectFile("public/images/fb-evil-creator.jpg");
     cy.get("#new-post-form").submit();

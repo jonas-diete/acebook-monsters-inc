@@ -9,13 +9,14 @@ describe("Timeline", () => {
     cy.get("#submit").click();
 
     // submit a post
-    cy.contains("#logout", "Logout");
     cy.get("#new-post-form").find('[type="text"]').type("Hello, world!");
     cy.get("#new-post-form").submit();
 
+    // submit a comment
     cy.get("#new-comment-form").find('[type="text"]').type("comment on post");
     cy.get("#new-comment-form").submit();
 
+    // check it exists
     cy.get(".comment").first().contains("comment on post");
   });
 });
