@@ -1,19 +1,25 @@
 
-<div class="center">
-  <h1>Welcome to AceBook</h1>
-  <h2>Please log in here</h2>
-
-  {{#if message}}
-      <div id="error">{{message}}</div>
-  {{/if}}
-
-  <form id="new-session-form" action="/sessions/new" method="post">
-    <div><input id="email" type="email" name="email" value="" placeholder="Email" required></div>
-    <div><input id="password" type="password" name="password" value="" placeholder="Password" required></div>
-    <div><input id="submit" type="submit" value="Login"></div>
-  </form>
-  <br>
-  <a href="/users/new">Create a new account</a>
+<div class="container homepage-center">
+  <div class="row">
+    <div class="col-md-7 text-center">
+      <h1 class="h1-homepage">Welcome to AceBook</h1>
+      <p class="fs-3 home-paragraph" > Acebook helps you connect and share with the monsters in your life.</p>
+    </div>
+    <div class="col-md-5 form-login">
+      {{#if message}}
+        <div id="error">{{message}}</div>
+      {{/if}}
+      <div class="login-box">
+        <form id="new-session-form" action="/sessions/new" method="post">
+          <div><input id="email" type="email" name="email" value="" placeholder="Email" required></div>
+          <div><input id="password" type="password" name="password" value="" placeholder="Password" required></div>
+          <div><input id="submit" type="submit" value="Login"></div>
+        </form>
+        <hr>
+        <a class="text-center" href="/users/new">Create a new account</a>
+      </div>
+    </div>
+  </div>
 </div>
 
 
