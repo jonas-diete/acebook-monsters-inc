@@ -1,3 +1,5 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
+
 * {
   padding: 0;
   margin: 0;
@@ -5,8 +7,7 @@
 
 body {
   font: 20px "Nunito", sans-serif;
-  background-image: url("../images/monsters_inc_background.png");
-  color: white;
+  background-color: #e6eeef;
 }
 
 main {
@@ -16,6 +17,7 @@ main {
 a {
   color: #00B7FF;
   text-decoration: none;
+  font-weight: 700;
 }
 
 .center {
@@ -25,6 +27,7 @@ a {
 
 #like-button {
   width: 20px;
+  height:18px;
   background-image: url("../images/like_heart_purple.png");
   background-size: 20px;
   background-repeat: no-repeat;
@@ -45,7 +48,7 @@ a {
 
 nav, footer {
   color: white;
-  background-color: rgb(36, 153, 36);
+  background-image: url("../images/monsters_inc_background.png");
 }
 
 nav {
@@ -83,7 +86,6 @@ footer {
   border: 3px solid rgb(236, 122, 247);
   border-radius: 10px;
   color: white;
-  width: 500px;
   margin: 20px auto;
   padding: 15px 20px;
   font-size: 25px;
@@ -94,8 +96,7 @@ footer {
   border: 3px solid rgb(150, 38, 160);
   border-radius: 30px;
   font-size: 20px;
-  padding: 3px 22px;
-  margin: 5px 10px 5px 15px;
+  
 }
 
 .pink-button {
@@ -121,12 +122,10 @@ footer {
 }
 
 #new-post-form input[type=text] {
-  background-color: rgb(151, 231, 251);
-  border: 3px solid rgb(0, 177, 204);
+  background-color:  #CEDDDF;
+  border: 3px solid #6e999f;
   border-radius: 10px;
   font-size: 20px;
-  padding: 3px 12px;
-  margin: 5px 0 5px 15px;
 }
 
 #new-post-form input[type=text]:focus {
@@ -137,85 +136,85 @@ footer {
 #new-post-form input[type=submit] {
   background-color: rgb(236, 122, 247);
   border: 3px solid rgb(150, 38, 160);
-  border-radius: 30px;
+  border-radius: 10px;
   font-size: 20px;
-  padding: 3px 22px;
-  margin: 5px 0 5px 15px;
+  width: 225.5px;
 }
 
 #new-post-form input[type=submit]:hover, #new-post-form input[type=submit]:active {
   background-color: rgb(94, 21, 101);
   border: 3px solid rgb(236, 122, 247);
   color: white;
+  width: 249.5px;
 }
 
 .posts {
   margin: 0;
   padding: 0;
+  
 }
 
 .post {
-  background-color: rgb(20, 108, 20);
-  color:rgb(72, 218, 255);
-  width: 500px;
+  background-color: white;
+  color:#054d5b;
   margin: 10px auto;
   padding: 0 0 15px 0;
-  border: 3px solid rgb(154, 228, 154);
   border-radius: 10px;
+  box-shadow: 0 4px 8px 0 #b6cccf, 0 -1px 20px 0 #b6cccf;
 }
 
 .post-header {
-  background-color:rgb(36, 153, 36);
-  color: white;
-  padding: 5px 15px;
+  background-color:white;
+  padding: 0px 40px;
+  padding-top: 20px;
+  padding-bottom: 10px;
   border-radius: 10px;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
 
 .postImage {
-  width: 494px;
+  width: 100%;
 }
 
 .post-message {
-  padding: 15px 20px;
+  padding: 15px 35px;
 }
 
 #new-comment-form input[type=text] {
-  background-color: rgb(36, 153, 36);
-  border: 3px solid rgb(16, 88, 16);
+  background-color: #b9c6c8;
+  border: 3px solid #6e999f;
   font-style: italic;
   border-radius: 10px;
   font-size: 16px;
   padding: 3px 12px;
-  margin: 5px 0 5px 15px;
+  margin: 5px 15px;
 }
 
 #new-comment-form input[type=text]:focus {
   outline: none;
-  border: 3px solid rgb(76, 209, 76);
+  border: 3px solid #6e999f;
 }
 
 #new-comment-form input[type=submit] {
-  background-color: rgb(76, 209, 76);
+  background-color: rgb(236, 122, 247);
   font-size: 16px;
   padding: 3px 12px;
-  border: 3px solid rgb(20, 108, 20);
-  border-radius: 20px;
+  border: 3px solid rgb(150, 38, 160);
+  border-radius: 10px;
   margin: 0;
 }
 
 #new-comment-form input[type=submit]:hover, #new-comment-form input[type=submit]:active {
-  background-color: rgb(16, 88, 16); 
-  border: 3px solid rgb(76, 209, 76);
+  background-color: rgb(150, 38, 160); 
+  border: 3px solid rgb(236, 122, 247);
   color: white;
 }
 
 .comment {
-  color: rgb(154, 228, 154);
+  color:#054d5b;
   font-size: 16px;
   font-style: italic;
-  margin: 5px 15px;
 }
 
 /* LOGIN/New Session and SIGNUP/New User forms */
@@ -225,12 +224,13 @@ footer {
 }
 
 #new-session-form input, #new-user-form input {
-  background-color: rgb(151, 231, 251);
-  border: 3px solid rgb(0, 177, 204);
+  background-color:  #CEDDDF;
+  border: 3px solid #6e999f;
   border-radius: 10px;
   font-size: 20px;
-  padding: 3px 12px;
-  margin: 5px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  width: 100%;
 }
 
 #new-session-form input:focus, #new-user-form input:focus {
@@ -241,10 +241,10 @@ footer {
 #new-session-form input[type=submit], #new-user-form input[type=submit] {
   background-color: rgb(236, 122, 247);
   border: 3px solid rgb(150, 38, 160);
-  border-radius: 30px;
+  border-radius: 10px;
   font-size: 20px;
-  padding: 3px 22px;
-  margin: 5px;
+  padding: 10px 22px;
+  
 }
 
 #new-session-form input[type=submit]:hover, #new-session-form input[type=submit]:active, #new-user-form input[type=submit]:hover, #new-user-form input[type=submit]:active {
@@ -252,3 +252,135 @@ footer {
   border: 3px solid rgb(236, 122, 247);
   color: white;
 }
+
+.homepage-center{
+  margin-top:10%;
+}
+
+.h1-align-right{
+  text-align: right;
+}
+
+.login-box{
+  width: 100%;
+  padding: 20px 10px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 #b6cccf, 0 -1px 20px 0 #b6cccf;
+  text-align: center;
+}
+
+.form-login {
+  text-align: center;
+  margin: 0 auto;
+}
+form#new-session-form{
+  width:100%;
+
+}
+
+.home-paragraph{
+  padding:10px 25px;
+  color: #0E5660;
+}
+
+.h1-homepage{
+  font-weight: 700;
+  color:rgb(94, 21, 101);
+
+}
+
+input#message{
+  border: 3px solid #6e999f;
+}
+
+
+
+form#new-comment-form{
+  text-align: center;
+}
+
+hr.post-hr{
+  margin: 0;
+}
+
+#delete-button-post{
+  width:30px;
+  height:30px;
+  border-radius: 50%;
+}
+
+#delete-button-comment{
+  width:20px;
+  height:20px;
+  border-radius: 50%;
+}
+
+
+.form-post-image{
+  margin: 0 auto;
+}
+
+@media (min-width:760px){
+  
+
+  
+  .form-login {
+    text-align: left;
+  }
+
+  input#message{
+    width:450px;
+  }
+
+  input#input-post, #comment-submit{
+    width:150px !important;
+  }
+
+  input#image-selector{
+    width: 700px;
+    padding: 0 20%;
+  }
+
+  div.post{
+    width:700px;
+  }
+
+  .post-comment {
+    width: 657px;
+    padding-top: 5px;
+}
+
+#new-post-form{
+  width:700px;
+}
+
+.post-comment{
+  width:657px;
+  padding-top:5px;
+}
+
+.comment{
+  margin: 5px 50px;
+}
+
+#image-selector::file-selector-button {
+  padding: 3px 22px;
+  margin: 5px 10px 5px 15px;
+}
+}
+
+@media (min-width:920px){
+  
+  /* .home-paragraph{
+    padding:10px 125px;
+  } */
+  
+  .form-login {
+    width: 30%;
+  }
+
+  
+  
+}
+

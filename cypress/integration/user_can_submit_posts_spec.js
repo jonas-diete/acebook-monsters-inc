@@ -9,14 +9,14 @@ describe("Timeline", () => {
     cy.get("#password2").type("Password@1");
     cy.get("#submit").click();
 
-    // submit a post
-    cy.contains("#logout", "Logout");
+    // submit posts
     cy.get("#new-post-form").find('[type="text"]').type("Hello, world!");
     cy.get("#new-post-form").submit();
 
     cy.get("#new-post-form").find('[type="text"]').type("Hi, guys!");
     cy.get("#new-post-form").submit();
 
+    // check they exist
     cy.get(".post").first().contains("Hi, guys!");
   });
 });
