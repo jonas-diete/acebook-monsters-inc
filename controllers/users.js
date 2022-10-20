@@ -27,7 +27,6 @@ const UsersController = {
             if (err) {
               errorMessage = "Email already exists.";
               res.render("users/new", { error: errorMessage });
-              // throw err;
             } else {
               req.session.user = user;
               res.status(201).redirect("/posts");
@@ -61,26 +60,19 @@ const UsersController = {
         });
       });
 
-      // User.findById(req.session.user._id, (err, user) => {
-      //   if (err) {
-      //     throw err;
-      //   }
+      let notRequestedFriendship = true;
+      console.log(req.session.user.friendRequests.length);
+      if (req.session.user.friendRequests.length == 0){
+        notRequestedFriendship = false;
+      }
+    
+      res.render("users/account", {
+        title: "Profile page",
+        session: req.session,
+        posts: posts,
+        notRequestedFriendship: notRequestedFriendship
+      });
 
-        let notRequestedFriendship = true;
-        console.log(req.session.user.friendRequests.length);
-        if (req.session.user.friendRequests.length == 0){
-          notRequestedFriendship = false;
-        }
-      
-        res.render("users/account", {
-          title: "Profile page",
-          session: req.session,
-          posts: posts,
-          notRequestedFriendship: notRequestedFriendship
-        });
-      // })
-
-      
     }).sort({ createdAt: -1 });
   },
 
@@ -169,29 +161,6 @@ const UsersController = {
 
   // assumes we are getting the id of the user who we want to be friends with as req.body.user_id
   AddFriend: (req, res) => {
-    // Saving the new friend's id in our friend-array
-    User.findById(req.session.user._id, (err, user) => {
-
-      let friendObject = {
-        name: req.body.friend_name,
-        id: req.body.friend_id
-      }
-
-      user.friends.push(friendObject);
-
-      for (let i = 0; i < user.friendRequests.length; i++){
-        if (user.friendRequests[i].id === req.body.friend_id){
-          user.friendRequests.splice(i, 1);
-        }
-      }
-
-      user.save((err) => {
-        if (err) {
-          throw err;
-        }
-      })
-    })
-
     // Saving our id into our new friend's friend-array
     User.findById(req.body.friend_id, (err, user) => {
 
@@ -207,14 +176,38 @@ const UsersController = {
         }
       })
     })
-    res.status(201).redirect("/posts");
+    
+    // Saving the new friend's id in our friend-array
+    User.findById(req.session.user._id, (err, user) => {
+
+      let friendObject = {
+        name: req.body.friend_name,
+        id: req.body.friend_id
+      }
+
+      user.friends.push(friendObject);
+
+      for (let i = 0; i < user.friendRequests.length; i++){
+        if (user.friendRequests[i].id == req.body.friend_id){
+          user.friendRequests.splice(i, 1);
+        }
+      }
+
+      user.save((err) => {
+        if (err) {
+          throw err;
+        }
+      })
+      req.session.user = user;
+      res.status(201).redirect("back");
+    })
   },
 
   DeclineFriend: (req, res) =>{
     User.findById(req.session.user._id, (err, user) => {
       
       for (let i = 0; i < user.friendRequests.length; i++){
-        if (user.friendRequests[i].id === req.body.friend_id){
+        if (user.friendRequests[i].id == req.body.friend_id){
           user.friendRequests.splice(i, 1);
         }
       }
@@ -223,8 +216,10 @@ const UsersController = {
           throw err;
         }
       })
+
+      req.session.user = user;
+      res.status(201).redirect("/users/account");
     })
-    res.status(201).redirect("/users/account");
   }
 };
 
