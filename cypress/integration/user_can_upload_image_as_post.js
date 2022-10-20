@@ -22,14 +22,11 @@ describe("Timeline", () => {
     cy.get("#submit").click();
 
     // submit a post
-
-    // cy.visit("/posts");
     cy.get("#new-post-form").find('[type="text"]').type("Hello, world!");
     cy.get("#image-selector").selectFile("public/images/fb-evil-creator.jpg");
     cy.get("#new-post-form").submit();
 
     cy.get(".post").first().contains("Hello, world!");
     cy.get(".postImage");
-    // Test passes but in the video, image is not created. Manual testing works.
   });
 });
