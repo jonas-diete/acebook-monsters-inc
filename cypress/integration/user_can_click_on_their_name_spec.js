@@ -14,7 +14,7 @@ describe("Name link", () => {
         cy.get("#new-post-form").submit();
         
         // clicks on their name
-        cy.get(".public-name").click();
+        cy.get(".profile-link").click();
 
         //account page
         cy.contains("h1", "My Account");
