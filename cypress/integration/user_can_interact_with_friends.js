@@ -73,15 +73,6 @@ describe("AddFriends", () => {
     cy.get("#account").click();
     cy.get("#accept-friend-request").click();
 
-
-    // //WILL CHANGE
-    // // go on homepage, create post, then click on own link to get to public profile
-    // cy.visit("/posts");
-    // cy.get("#new-post-form").find('[type="text"]').type("Hello, world!");
-    // cy.get("#new-post-form").submit();
-    // cy.get("a.profile-link").first().click();
-    // //
-
     // Added friend (Guille) appears in friend list
     cy.contains("a.friend", "Guille");
   });
