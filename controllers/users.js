@@ -60,11 +60,19 @@ const UsersController = {
         });
       });
 
+      let notRequestedFriendship = true;
+      console.log(req.session.user.friendRequests.length);
+      if (req.session.user.friendRequests.length == 0){
+        notRequestedFriendship = false;
+      }
+    
       res.render("users/account", {
         title: "Profile page",
         session: req.session,
         posts: posts,
+        notRequestedFriendship: notRequestedFriendship
       });
+
     }).sort({ createdAt: -1 });
   },
 
@@ -83,10 +91,25 @@ const UsersController = {
         if (err) {
           throw err;
         }
+
+        let isNoFriend = true;
+        req.session.user.friends.forEach((friend) => {
+          if (friend.id == user._id  || req.session.user._id == user._id) {
+            isNoFriend = false;
+          } 
+        })
+
+        user.friendRequests.forEach((friend) => {
+          if (friend.id == req.session.user._id) {
+            isNoFriend = false;
+          } 
+        })
+  
         res.render("users/publicAccount", {
           currentAccount: user,
           session: req.session,
           posts: posts,
+          isNoFriend: isNoFriend
         });
       });
     }).sort({ createdAt: -1 });
@@ -117,6 +140,87 @@ const UsersController = {
       });
     });
   },
+
+  RequestFriend: (req, res) => {
+    User.findById(req.body.friend_id, (err, user) => {
+      let requestedFriendObject = {
+        name: req.session.user.name,
+        id: req.session.user._id
+      }
+      user.friendRequests.push(requestedFriendObject);
+      user.save((err) => {
+        if (err) {
+          throw err;
+        }
+      })
+    })
+    res.status(201).redirect("/users/"+ req.body.friend_id);
+  },
+
+  
+
+  // assumes we are getting the id of the user who we want to be friends with as req.body.user_id
+  AddFriend: (req, res) => {
+    // Saving our id into our new friend's friend-array
+    User.findById(req.body.friend_id, (err, user) => {
+
+      let friendObject = {
+        name: req.session.user.name,
+        id: req.session.user._id
+      }
+
+      user.friends.push(friendObject);
+      user.save((err) => {
+        if (err){
+          throw err;
+        }
+      })
+    })
+    
+    // Saving the new friend's id in our friend-array
+    User.findById(req.session.user._id, (err, user) => {
+
+      let friendObject = {
+        name: req.body.friend_name,
+        id: req.body.friend_id
+      }
+
+      user.friends.push(friendObject);
+
+      for (let i = 0; i < user.friendRequests.length; i++){
+        if (user.friendRequests[i].id == req.body.friend_id){
+          user.friendRequests.splice(i, 1);
+        }
+      }
+
+      user.save((err) => {
+        if (err) {
+          throw err;
+        }
+      })
+      req.session.user = user;
+      res.status(201).redirect("back");
+    })
+  },
+
+  DeclineFriend: (req, res) =>{
+    User.findById(req.session.user._id, (err, user) => {
+      
+      for (let i = 0; i < user.friendRequests.length; i++){
+        if (user.friendRequests[i].id == req.body.friend_id){
+          user.friendRequests.splice(i, 1);
+        }
+      }
+      user.save((err) => {
+        if (err){
+          throw err;
+        }
+      })
+
+      req.session.user = user;
+      res.status(201).redirect("/users/account");
+    })
+  }
 };
 
 module.exports = UsersController;

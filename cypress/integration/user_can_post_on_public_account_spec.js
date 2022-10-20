@@ -25,7 +25,7 @@ describe("Public Account", () => {
     cy.get("#submit").click();
 
     // click on their name
-    cy.get(".public-name").click();
+    cy.get(".profile-link").click();
 
     //visit their account
     cy.get("#new-post-form").find('[type="text"]').type("Hello nameone");
@@ -33,5 +33,4 @@ describe("Public Account", () => {
     cy.get(".post").contains("Hello nameone");
     cy.get(".posts > .post").eq(1).contains("Hello, world!");
   });
-  // it("can see their post on other people's account on the timeline", () => {});
 });
