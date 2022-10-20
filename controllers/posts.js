@@ -72,7 +72,7 @@ const PostsController = {
         if (err) {
           throw err;
         }
-        res.status(201).redirect("back");
+        res.status(201).redirect("back")
       });
     });
   },
