@@ -28,14 +28,17 @@ const PostsController = {
     post.message = req.body.message;
     post.photo_link = req.session.user.photo_link;
     post.user_id = req.session.user._id;
+
     if (req.params.id) {
       post.posted_on = req.params.id;
     } else {
       post.posted_on = req.session.user._id;
     }
+
     if (req.file) {
       post.image = `/images/${req.file.filename}`;
     }
+
     const date = new Date();
     post.date_string = `${date.getDate()}-${
       date.getMonth() + 1

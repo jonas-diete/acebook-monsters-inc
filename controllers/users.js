@@ -69,6 +69,9 @@ const UsersController = {
   },
 
   PublicIndex: (req, res) => {
+    if (req.params.id == req.session.user._id){
+      res.status(201).redirect("/users/account")    
+    }
     Post.find({ posted_on: req.params.id }, (err, posts) => {
       if (err) {
         throw err;
