@@ -25,7 +25,7 @@ describe("Public Account", () => {
     cy.get("#submit").click();
 
     // click on their name
-    cy.get(".public-name").click();
+    cy.get(".profile-link").click();
     cy.contains("h1", "nameone's Account");
   });
 
@@ -63,9 +63,7 @@ describe("Public Account", () => {
     cy.get("#new-post-form").submit();
 
     // click on their name
-    // cy.get('.posts > .post').eq(3)
-    // .then(element => cy.get("#public-name").click());
-    cy.get(".posts > .post").eq(3).find(".public-name").click();
+    cy.get(".posts > .post").eq(3).find(".profile-link").click();
     cy.contains("h1", "nameone's Account");
     cy.get(".post:contains('nameone')").its("length").should("eq", 2);
   });

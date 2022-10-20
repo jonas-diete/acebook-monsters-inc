@@ -9,15 +9,11 @@ describe("Account Page", () => {
     cy.get("#submit").click();
 
     //nav bar
-    cy.contains("#logout", "Logout");
     cy.get("#account").click();
 
     //account page
     cy.contains("h1", "My Account");
     cy.contains("#account-name", "name");
-
-    //view account
-    cy.contains("#logout", "Logout");
   });
 
   it("can edit their account page when signed in", () => {
@@ -29,15 +25,15 @@ describe("Account Page", () => {
     cy.get("#password2").type("Password@1");
     cy.get("#submit").click();
 
-    //nav bar
-    cy.contains("#logout", "Logout");
+    //go to their account
     cy.get("#account").click();
 
-    //account page
+    //change profile picture
     cy.get("#image-selector").selectFile("public/images/fb-evil-creator.jpg");
     cy.get("#submit").click();
 
     //view account
-    cy.contains("#logout", "Logout");
+    cy.contains("h1", "My Account");
+    cy.contains("#account-name", "name");
   });
 });
