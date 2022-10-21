@@ -1,6 +1,8 @@
 # Acebook
 
-This is a Node.js template for the Acebook engineering project.
+This is a Node.js Acebook engineering project.
+
+Created by [Guillermina Lorenzo](https://github.com/GuillerminaLorenzo), [James Ruffini](https://github.com/iniffur), [Jonas Diete](https://github.com/jonas-diete), [Liovirgilda Mendonca](https://github.com/liovirgildam), [Millennia Severino](https://github.com/MillieKS) and [Thomas Mannion](https://github.com/TomMannion).
 
 It uses:
 
@@ -14,9 +16,13 @@ It uses:
 
 ## Card wall
 
-REPLACE THIS TEXT WITH A LINK TO YOUR CARD WALL
+https://trello.com/b/TEgHXan1/monsters-inc-project
 
-## Quickstart
+## Hosted on Heroku
+
+https://acebook-monsters-inc.herokuapp.com/
+
+## If you want to try this on your computer, download this repo and follow these instructions:
 
 ### Install Node.js
 
