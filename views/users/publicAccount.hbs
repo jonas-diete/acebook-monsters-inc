@@ -1,37 +1,59 @@
-<div>
-
+<div class="acc-container">
   <h1>{{currentAccount.name}}'s Account</h1>
-  <div class="account">
-     {{#if isNoFriend}}
-    <form method="POST" action="/users/request-friend">
-      <input id="friend_id" type="hidden" value="{{currentAccount._id}}"
-        name="friend_id">
-      <button id="friend-request-btn" type="submit" class="btn" 
-        style="background-color: #40c4e5; color: white;">Add Friend</button>
-    </form>
-    {{/if}}
-    <br>
-    <h3>Friends List:</h3>
-    {{#each currentAccount.friends}}
-      <div>
-          <a class="friend" href="/users/{{this.id}}" >{{this.name}}</a>
-      </div>
-    {{/each}}  
-    <div class="form-post-image">
-      <form id="new-post-form" action="/posts/create/{{currentAccount._id}}" method="post" enctype="multipart/form-data">
-        <div id="message-container"><label for="message">Write something for {{currentAccount.name}}?</label></div>
-        <div><input id="message" type="text" name="message" >
-        <input id="input-post" type="submit" value="Post"></div>
-        <div>
-          <input id="image-selector" type="file" name="image" value="Post" accept=".png, .jpeg, .jpg, .gif">
+  <div class="row gutters">
+    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+      <div class="account card h-100">
+        <div class="card-body">
+          <div class="account-settings">
+            <div class="user-profile">
+              <div class="user-avatar">
+                <img src="{{session.user.photoLink}}"
+                  alt="profile_picture">
+              </div>
+
+              <h5 class="user-name" id="account-name">{{currentAccount.name}}</h5>
+              <h6 class="user-email">{{currentAccount.email}}</h6>
+            </div>
+            <div class="friends">
+              {{#if isNoFriend}}
+              <form method="POST" action="/users/request-friend">
+                <input id="friend_id" type="hidden"
+                  value="{{currentAccount._id}}"
+                  name="friend_id">
+                <button id="friend-request-btn" type="submit" class="btn"
+                  style="background-color: #40c4e5; color: white;">Add Friend</button>
+              </form>
+              {{/if}}
+              <br>
+              <h3>Friends List:</h3>
+              {{#each currentAccount.friends}}
+              <div>
+                <a class="friend" href="/users/{{this.id}}">{{this.name}}</a>
+              </div>
+              {{/each}}
+            </div>
+          </div>
         </div>
-      </form>
+      </div>
     </div>
-    <div class="posts">
+    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 posts">
+      <div class="form-post-image">
+        <form id="new-post-form" action="/posts/create/{{currentAccount._id}}"
+          method="post" enctype="multipart/form-data">
+          <div id="message-container"><label for="message">Write something for
+              {{currentAccount.name}}?</label></div>
+          <div><input id="message" type="text" name="message">
+            <input id="input-post" type="submit" value="Post"></div>
+          <div>
+            <input id="image-selector" type="file" name="image" value="Post"
+              accept=".png, .jpeg, .jpg, .gif, .webp">
+          </div>
+        </form>
+      </div>
       {{#each posts}}
       <div class="post">
         <div class="post-header bg-overlay-thing">
-          <img class="profile-picture" src="{{this.photoLink}}" alt="profile picture">
+          <img class="friend-profile-picture" src="{{this.photoLink}}" alt="profile-picture">
           <a class="public-name" href="/users/{{this.userId}}">{{this.name}}</a> - {{this.dateString}}
         </div>
         {{#if this.image}}
@@ -39,17 +61,21 @@
         {{/if}}
         <hr class="post-hr">
         <div class="post-message">
-          
-          <!-- Bootstrap grid system -->
           <div class="container">
             <div class="row">
               <div class="col-10 col-sm-11">
                 <!-- create a like button and the number of likes -->
-                <form method="POST" action="/posts/like">
-                  <input type="hidden" value="{{this._id}}" name="postId">
-                  <input type="hidden" value="{{../session.user._id}}" name="userId">
+                <form method="POST"
+                  action="/posts/like">
+                  <input type="hidden"
+                    value="{{this._id}}"
+                    name="postId">
+                  <input type="hidden"
+                    value="{{../session.user._id}}"
+                    name="userId">
                   {{this.message}}
-                  <input type="submit" value="" id="like-button">
+                  <input type="submit" value=""
+                    id="like-button">
                   {{#if this.likes}}
                   <span id="like-number">{{this.likes.length}}</span>
                   {{/if}}
@@ -89,8 +115,9 @@
             </div>
           </div>
         </div>
-        {{/each}} 
+      {{/each}} 
       </div>
       {{/each}}
     </div>
   </div>
+</div>

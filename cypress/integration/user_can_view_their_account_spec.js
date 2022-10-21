@@ -29,7 +29,9 @@ describe("Account Page", () => {
     cy.get("#account").click();
 
     //change profile picture
-    cy.get("#image-selector").selectFile("public/images/fb-evil-creator.jpg");
+    cy.get("#image-selector-profile").selectFile(
+      "public/images/fb-evil-creator.jpg"
+    );
     cy.get("#submit").click();
 
     //view account

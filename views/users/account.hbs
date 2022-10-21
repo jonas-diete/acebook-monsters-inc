@@ -1,160 +1,159 @@
-<div>
-    <div class="acc-container">
-        <h1>My Account</h1>
-        <div class="row gutters">
-            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-                <div class="account card h-100">
-                    <div class="card-body">
-                        <div class="account-settings">
-                            <div class="user-profile">
-                                <div class="user-avatar">
-                                    <img src="{{session.user.photoLink}}"
-                                        alt="profile-picture">
+<div class="acc-container">
+    <h1>My Account</h1>
+    <div class="row gutters">
+        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+            <div class="account card h-100">
+                <div class="card-body">
+                    <div class="account-settings">
+                        <div class="user-profile">
+                            <div class="user-avatar">
+                                <img src="{{session.user.photoLink}}"
+                                    alt="profile_picture">
+                            </div>
+                            <form id="change-profile-pic"
+                                action="/users/account/image"
+                                method="POST"
+                                enctype="multipart/form-data">
+                                <div class="pb-2">
+                                    <input id="image-selector-profile"
+                                        type="file"
+                                        name="image"
+                                        value="Post" accept=".png, .jpeg, .jpg,
+                                        .gif">
                                 </div>
-                                <form id="change-profile-pic"
-                                    action="/users/account/image"
-                                    method="POST"
-                                    enctype="multipart/form-data">
-                                    <div class="pb-2">
-                                        <input id="image-selector"
-                                            type="file"
-                                            name="image"
-                                            value="Post" accept=".png, .jpeg, .jpg, .gif">
-                                    </div>
-                                    <div> 
-                                        <button class="pink-button px-2"
-                                            style='display:none;'
-                                            id="submit" type="submit">Submit</button>
-                                    </div> 
+                                <div>
+                                    <button class="pink-button px-2"
+                                        style='display:none;'
+                                        id="submit" type="submit">Submit</button>
+                                </div>
+                            </form>
+                            <h5 class="user-name" id="account-name">{{session.user.name}}</h5>
+                            <h6 class="user-email">{{session.user.email}}</h6>
+                        </div>
+                        <div class="friends">
+                            {{#if notRequestedFriendship}}
+                            {{#each session.user.friendRequests}}
+                            <div>
+                                <a href="/users/{{this.id}}">{{this.name}}</a>
+                                has
+                                requested to be your friend!
+                                <form method="POST"
+                                    action="/users/accept-friend-request">
+                                    <input id="friend_id" type="hidden"
+                                        value="{{this.id}}"
+                                        name="friend_id">
+                                    <input id="friend_name" type="hidden"
+                                        value="{{this.name}}"
+                                        name="friend_name">
+                                    <input id="accept-friend-request"
+                                        type="submit"
+                                        value="Accept">
                                 </form>
-                                <h5 class="user-name" id="account-name">{{session.user.name}}</h5>
-                                <h6 class="user-email">{{session.user.email}}</h6>
+                                <form method="POST"
+                                    action="/users/decline-friend-request">
+                                    <input id="friend_id" type="hidden"
+                                        value="{{this.id}}"
+                                        name="friend_id">
+                                    <input id="decline-friend-request"
+                                        type="submit"
+                                        value="Decline">
+                                </form>
                             </div>
-                            <div class="friends">
-                                {{#if notRequestedFriendship}}
-                                {{#each session.user.friendRequests}}
-                                <div>
-                                    <a href="/users/{{this.id}}">{{this.name}}</a>
-                                    has
-                                    requested to be your friend!
-                                    <form method="POST"
-                                        action="/users/accept-friend-request">
-                                        <input id="friend_id" type="hidden"
-                                            value="{{this.id}}"
-                                            name="friend_id">
-                                        <input id="friend_name" type="hidden"
-                                            value="{{this.name}}"
-                                            name="friend_name">
-                                        <button  id="accept-friend-request" type="submit" class="btn" 
-                                            style="background-color: #40c4e5; color: white;">Accept</button>
-                                    </form>
-                                    <form method="POST"
-                                        action="/users/decline-friend-request">
-                                        <input id="friend_id" type="hidden"
-                                            value="{{this.id}}"
-                                            name="friend_id">
-                                        <button  id="decline-friend-request" type="submit" class="btn" 
-                                            style="background-color: #40c4e5; color: white;">Decline</button>
-                                    </form>
-                                </div>
-                                {{/each}}
-                                {{/if}}
-                                {{#if session.user.friends}}
-                                <h3>Friends List:</h3>
-                                {{/if}}
-                                {{#each session.user.friends}}
-                                <div>
-                                    <a class="friend" href="/users/{{this.id}}">{{this.name}}</a>
-                                </div>
-                                {{/each}}
+                            {{/each}}
+                            {{/if}}
+                            {{#if session.user.friends}}
+                            <h3>Friends List:</h3>
+                            {{/if}}
+                            {{#each session.user.friends}}
+                            <div>
+                                <a class="friend" href="/users/{{this.id}}">{{this.name}}</a>
                             </div>
+                            {{/each}}
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-                {{#each posts}}
-                <div class="post">
-                    <div class="post-header bg-overlay-thing">
-                        <img class="profile-picture"
-                            src="{{this.photoLink}}"
-                            alt="profile-picture">
-                        {{this.name}} - {{this.dateString}}
-                    </div>
-                    {{#if this.image}}
-                    <img src="{{this.image}}" class="post-image" alt="">
-                    {{/if}}
-                    <hr class="post-hr">
-                    <div class="post-message">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-10 col-sm-11">
-                                    <!-- create a like button and the number of likes -->
-                                    <form method="POST"
-                                        action="/posts/like">
-                                        <input type="hidden"
-                                            value="{{this._id}}"
-                                            name="postId">
-                                        <input type="hidden"
-                                            value="{{../session.user._id}}"
-                                            name="userId">
-                                        {{this.message}}
-                                        <input type="submit" value=""
-                                            id="like-button">
-                                        {{#if this.likes}}
-                                        <span id="like-number">{{this.likes.length}}</span>
-                                        {{/if}}
-                                    </form>
-                                </div>
-                                <div class="col-1">
-                                    {{#if this.owner}}
-                                    <!-- Delete a post -->
-                                    <form id="delete-post-form"
-                                        action="/posts/delete/{{this._id}}"
-                                        method="post">
-                                        <input id="delete-button-post"
-                                            type="image"
-                                            src="../images/trash-can.webp"
-                                            alt="Delete image">
-                                    </form>
-                                    {{/if}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{#each this.comments}}
-                    <div class="container post-comment">
+        </div>
+        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 posts">
+            {{#each posts}}
+            <div class="post">
+                <div class="post-header bg-overlay-thing">
+                    <img class="friend-profile-picture" src="{{this.photoLink}}"
+                        alt="profile-picture">
+                    <a class="profile-link" href="/users/{{this.userId}}">{{this.name}}</a> - {{this.dateString}}
+                </div>
+                {{#if this.image}}
+                <img src="{{this.image}}" class="post-image" alt="">
+                {{/if}}
+                <hr class="post-hr">
+                <div class="post-message">
+                    <div class="container">
                         <div class="row">
                             <div class="col-10 col-sm-11">
-                                <div class="comment">{{this.name}} -
-                                    {{this.message}} - {{this.createdAt}}</div>
+                                <!-- create a like button and the number of likes -->
+                                <form method="POST"
+                                    action="/posts/like">
+                                    <input type="hidden"
+                                        value="{{this._id}}"
+                                        name="postId">
+                                    <input type="hidden"
+                                        value="{{../session.user._id}}"
+                                        name="userId">
+                                    {{this.message}}
+                                    <input type="submit" value=""
+                                        id="like-button">
+                                    {{#if this.likes}}
+                                    <span id="like-number">{{this.likes.length}}</span>
+                                    {{/if}}
+                                </form>
                             </div>
-                            <div class="col-1" style="margin-left: -5px;">
-                                {{#if this.commentOwner}}
-                                <!-- Delete a comment -->
-                                <form id="delete-comment-form"
-                                    action="/posts/comment/delete/{{this.postId}}/{{this._id}}"
+                            <div class="col-1">
+                                {{#if this.owner}}
+                                <!-- Delete a post -->
+                                <form id="delete-post-form"
+                                    action="/posts/delete/{{this._id}}"
                                     method="post">
-                                    <input id="delete-button-comment"
+                                    <input id="delete-button-post"
                                         type="image"
                                         src="../images/trash-can.webp"
-                                        alt="Delete
-                                        image">
+                                        alt="Delete image">
                                 </form>
                                 {{/if}}
                             </div>
                         </div>
                     </div>
-                    {{/each}}
+                </div>
+                {{#each this.comments}}
+                <!-- Bootstrap grid system -->
+                <div class="container post-comment">
+                    <div class="row">
+                        <div class="col-10 col-sm-11">
+                            <div class="comment">{{this.name}} -
+                                {{this.message}} - {{this.createdAt}}</div>
+                        </div>
+                        <div class="col-1">
+                            {{#if this.commentOwner}}
+                            <!-- Delete a comment -->
+                            <form id="delete-comment-form"
+                                action="/posts/comment/delete/{{this.postId}}/{{this._id}}"
+                                method="post">
+                                <input id="delete-button-comment" type="image"
+                                    src="../images/trash-can.webp" alt="Delete
+                                    image">
+                            </form>
+                            {{/if}}
+                        </div>
+                    </div>
                 </div>
                 {{/each}}
             </div>
+            {{/each}}
         </div>
     </div>
-    <script
-        src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-    $("#image-selector").on("change", function () {
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#image-selector-profile").on("change", function () {
         $("#submit").show();
     })
 </script>
