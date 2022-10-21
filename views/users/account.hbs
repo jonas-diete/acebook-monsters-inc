@@ -9,8 +9,8 @@
                         <div class="account-settings">
                             <div class="user-profile">
                                 <div class="user-avatar">
-                                    <img src="{{session.user.photo_link}}"
-                                        alt="profile_picture">
+                                    <img src="{{session.user.photoLink}}"
+                                        alt="profile-picture">
                                 </div>
                                 <form id="change-profile-pic"
                                     action="/users/account/image"
@@ -79,13 +79,13 @@
                 {{#each posts}}
                 <div class="post">
                     <div class="post-header bg-overlay-thing">
-                        <img class="profile_picture"
-                            src="{{this.photo_link}}"
-                            alt="profile_picture">
-                        {{this.name}} - {{this.date_string}}
+                        <img class="profile-picture"
+                            src="{{this.photoLink}}"
+                            alt="profile-picture">
+                        {{this.name}} - {{this.dateString}}
                     </div>
                     {{#if this.image}}
-                    <img src="{{this.image}}" class="postImage" alt="">
+                    <img src="{{this.image}}" class="post-image" alt="">
                     {{/if}}
                     <hr class="post-hr">
                     <div class="post-message">
@@ -117,7 +117,7 @@
                                         method="post">
                                         <input id="delete-button-post"
                                             type="image"
-                                            src="../images/trash_can.webp"
+                                            src="../images/trash-can.webp"
                                             alt="Delete image">
                                     </form>
                                     {{/if}}
@@ -133,14 +133,14 @@
                                     {{this.message}} - {{this.createdAt}}</div>
                             </div>
                             <div class="col-1" style="margin-left: -5px;">
-                                {{#if this.comment_owner}}
+                                {{#if this.commentOwner}}
                                 <!-- Delete a comment -->
                                 <form id="delete-comment-form"
-                                    action="/posts/comment/delete/{{this.post_id}}/{{this._id}}"
+                                    action="/posts/comment/delete/{{this.postId}}/{{this._id}}"
                                     method="post">
                                     <input id="delete-button-comment"
                                         type="image"
-                                        src="../images/trash_can.webp"
+                                        src="../images/trash-can.webp"
                                         alt="Delete
                                         image">
                                 </form>

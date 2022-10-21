@@ -50,7 +50,7 @@ describe("User model", () => {
       name: "name",
       email: "someone@example.com",
       password: "password",
-      photo_link: "link",
+      photoLink: "link",
     });
 
     user.save((err) => {
@@ -63,7 +63,7 @@ describe("User model", () => {
           name: "name",
           email: "someone@example.com",
           password: "password",
-          photo_link: "link",
+          photoLink: "link",
         });
         done();
       });

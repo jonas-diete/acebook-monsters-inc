@@ -28,7 +28,7 @@ a {
 #like-button {
   width: 20px;
   height:18px;
-  background-image: url("../images/like_heart_purple.png");
+  background-image: url("../images/like-heart-purple.png");
   background-size: 20px;
   background-repeat: no-repeat;
   border: none;
@@ -36,17 +36,17 @@ a {
   background-position: center;
 }
 
-.navbar_forms {
+.navbar-forms {
     float:left;
 }
 
-.profile_picture {
+.profile-picture {
   border-radius: 50%;
   width: 40px;
   height: 40px;
 }
 
-.friend-profile_picture {
+.friend-profile-picture {
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -56,7 +56,7 @@ a {
 
 nav, footer {
   color: white;
-  background-image: url("../images/monsters_inc_background.png");
+  background-image: url("../images/monsters-inc-background.png");
 }
 
 nav {
@@ -187,7 +187,7 @@ footer {
   border-bottom-right-radius: 0;
 }
 
-.postImage {
+.post-image {
   width: 100%;
 }
 
@@ -381,9 +381,6 @@ hr.post-hr{
 }
 
 @media (min-width:760px){
-  
-
-  
   .form-login {
     text-align: left;
   }
@@ -396,11 +393,6 @@ hr.post-hr{
     width:150px !important;
   }
 
-  input#image-selector{
-    /* width: 700px;
-    padding: 0 20%; */
-  }
-
   div.post{
     width:700px;
   }
@@ -408,29 +400,23 @@ hr.post-hr{
   .post-comment {
     width: 657px;
     padding-top: 5px;
-}
+  }
 
-#new-post-form{
-  width:700px;
-}
+  #new-post-form{
+    width:700px;
+  }
 
-.post-comment{
-  width:657px;
-  padding-top:5px;
-}
+  .post-comment{
+    width:657px;
+    padding-top:5px;
+  }
 
-.comment{
-  margin: 5px 50px;
-}
-
-#image-selector::file-selector-button {
-  /* padding: 3px 22px;
-  margin: 5px 10px 5px 15px; */
-}
+  .comment{
+    margin: 5px 50px;
+  }
 }
 
 @media (min-width:920px){
-  
   .form-login {
     width: 30%;
   }
@@ -482,7 +468,6 @@ hr.post-hr{
 }
 
 .card {
-  /* background: linear-gradient(rgba(255, 255, 255, 0.554), rgba(255, 255, 255, 0.554)),  url("../images/account-page-bg.png"); */
   background-image: url("../images/account-page-bg.png");
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;

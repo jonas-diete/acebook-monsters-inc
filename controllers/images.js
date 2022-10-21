@@ -14,8 +14,8 @@ const ImagesController = {
           err: "No file exists",
         });
       }
-      const readstream = gfs.createReadStream(file.filename);
-      readstream.pipe(res);
+      const readStream = gfs.createReadStream(file.filename);
+      readStream.pipe(res);
     });
   },
 };
