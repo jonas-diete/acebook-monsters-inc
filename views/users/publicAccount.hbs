@@ -53,11 +53,11 @@
       {{#each posts}}
       <div class="post">
         <div class="post-header bg-overlay-thing">
-          <img class="profile_picture" src="{{this.photo_link}}" alt="profile_picture">
-          <a class="public-name" href="/users/{{this.user_id}}">{{this.name}}</a> - {{this.date_string}}
+          <img class="profile-picture" src="{{this.photoLink}}" alt="profile picture">
+          <a class="public-name" href="/users/{{this.userId}}">{{this.name}}</a> - {{this.dateString}}
         </div>
         {{#if this.image}}
-        <img src="{{this.image}}" class="postImage" alt="">
+          <img src="{{this.image}}" class="post-image" alt="">
         {{/if}}
         <hr class="post-hr">
         <div class="post-message">
@@ -83,42 +83,38 @@
               </div>
               <div class="col-1">
                 {{#if this.owner}}
-                <!-- Delete a post -->
-                <form id="delete-post-form"
-                  action="/posts/delete/{{this._id}}"
-                  method="post">
-                  <input id="delete-button-post"
-                    type="image"
-                    src="../images/trash_can.webp"
-                    alt="Delete image">
-                </form>
+                  <!-- Delete a post -->
+                  <form id="delete-post-form" action="/posts/delete/{{this._id}}" method="post">
+                    <input id="delete-button-post" type="image" src="../images/trash-can.webp" alt="Delete image">
+                  </form>
                 {{/if}}
               </div>
             </div>
           </div>
-        </div>
-    <!-- create a comment on the post -->
-    <form id="new-comment-form" action="/posts/{{this._id}}" method="post">
-      <input id="message" type="text" name="message" placeholder="Comment here">
-      <input id="comment-submit" type="submit" value="Submit">
-    </form>
-    {{#each this.comments}}
-      <!-- Bootstrap grid system -->
-      <div class="container post-comment">
-        <div class="row">
-          <div class="col-10 col-sm-11">
-            <div class="comment">{{this.name}} - {{this.message}} - {{this.createdAt}}</div>
+        </div> 
+        <!-- create a comment on the post -->
+        <form id="new-comment-form" action="/posts/{{this._id}}" method="post">
+          <input id="message" type="text" name="message" placeholder="Comment here">
+          <input id="comment-submit" type="submit" value="Submit">
+        </form>
+        
+        {{#each this.comments}}
+        <!-- Bootstrap grid system -->
+        <div class="container post-comment">
+          <div class="row">
+            <div class="col-10 col-sm-11">
+              <div class="comment">{{this.name}} - {{this.message}} - {{this.createdAt}}</div>
+            </div>
+            <div class="col-1">
+              {{#if this.commentOwner}}
+                <!-- Delete a comment -->
+                <form id="delete-comment-form" action="/posts/comment/delete/{{this.postId}}/{{this._id}}" method="post">
+                  <input id="delete-button-comment" type="image" src="../images/trash-can.webp" alt="Delete image">
+                </form>
+              {{/if}}
+            </div>
           </div>
-          <div class="col-1">
-            {{#if this.comment_owner}}
-              <!-- Delete a comment -->
-              <form id="delete-comment-form" action="/posts/comment/delete/{{this.post_id}}/{{this._id}}" method="post">
-                <input id="delete-button-comment" type="image" src="../images/trash_can.webp" alt="Delete image">
-              </form>
-            {{/if}}
-          </div>
         </div>
-      </div>
       {{/each}} 
       </div>
       {{/each}}

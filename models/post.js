@@ -6,12 +6,12 @@ const PostSchema = new mongoose.Schema(
     message: String,
     likes: Array,
     comments: Array,
-    photo_link: String,
+    photoLink: String,
     image: String,
-    date_string: String,
+    dateString: String,
     fileStorage: Array,
-    user_id: String,
-    posted_on: String,
+    userId: String,
+    postedOn: String,
   },
   { timestamps: true }
 );

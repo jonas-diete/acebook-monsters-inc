@@ -27,6 +27,6 @@ describe("Timeline", () => {
     cy.get("#new-post-form").submit();
 
     cy.get(".post").first().contains("Hello, world!");
-    cy.get(".postImage");
+    cy.get(".post-image");
   });
 });
