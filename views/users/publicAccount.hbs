@@ -7,7 +7,7 @@
           <div class="account-settings">
             <div class="user-profile">
               <div class="user-avatar">
-                <img src="{{session.user.photo_link}}"
+                <img src="{{session.user.photoLink}}"
                   alt="profile_picture">
               </div>
 
@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 posts">
       <div class="form-post-image">
         <form id="new-post-form" action="/posts/create/{{currentAccount._id}}"
           method="post" enctype="multipart/form-data">
@@ -53,7 +53,7 @@
       {{#each posts}}
       <div class="post">
         <div class="post-header bg-overlay-thing">
-          <img class="profile-picture" src="{{this.photoLink}}" alt="profile picture">
+          <img class="friend-profile-picture" src="{{this.photoLink}}" alt="profile-picture">
           <a class="public-name" href="/users/{{this.userId}}">{{this.name}}</a> - {{this.dateString}}
         </div>
         {{#if this.image}}

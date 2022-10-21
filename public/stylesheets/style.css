@@ -104,11 +104,12 @@ footer {
   font-size: 25px;
 }
 
-#image-selector::file-selector-button {
+#image-selector::file-selector-button, #image-selector-profile::file-selector-button {
   background-color: rgb(236, 122, 247);
   border: 3px solid rgb(150, 38, 160);
   border-radius: 30px;
   font-size: 20px;
+  padding: 0px 10px;
 }
 
 .pink-button {
@@ -124,7 +125,7 @@ footer {
   color: white;
 }
 
-#image-selector::file-selector-button:hover, #image-selector::file-selector-button:active {
+#image-selector::file-selector-button:hover, #image-selector::file-selector-button:active , #image-selector-profile::file-selector-button:hover, #image-selector-profile::file-selector-button:active {
   background-color: rgb(94, 21, 101);
   border: 3px solid rgb(236, 122, 247);
   color: white;
@@ -140,6 +141,7 @@ footer {
   border: 3px solid #6e999f;
   border-radius: 10px;
   font-size: 20px;
+  padding: 0px 10px;
 }
 
 #new-post-form input[type=text]:focus {
@@ -398,7 +400,7 @@ a.profile-link:hover, a.public-name:hover{
 
 /* ACCOUNT PAGE */
 
-#image-selector {
+#image-selector-profile {
   font-size: 0pt;
 }
 
@@ -462,8 +464,6 @@ a.profile-link:hover, a.public-name:hover{
   font-family: 'Fredoka One', cursive;
   color:rgb(94, 21, 101);
 }
-
-
 
 @media (min-width:760px){
   .form-login {
