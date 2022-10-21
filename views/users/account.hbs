@@ -1,5 +1,4 @@
 <div>
-    
     <div class="acc-container">
         <h1>My Account</h1>
         <div class="row gutters">
@@ -46,18 +45,16 @@
                                         <input id="friend_name" type="hidden"
                                             value="{{this.name}}"
                                             name="friend_name">
-                                        <input id="accept-friend-request"
-                                            type="submit"
-                                            value="Accept">
+                                        <button  id="accept-friend-request" type="submit" class="btn" 
+                                            style="background-color: #40c4e5; color: white;">Accept</button>
                                     </form>
                                     <form method="POST"
                                         action="/users/decline-friend-request">
                                         <input id="friend_id" type="hidden"
                                             value="{{this.id}}"
                                             name="friend_id">
-                                        <input id="decline-friend-request"
-                                            type="submit"
-                                            value="Decline">
+                                        <button  id="decline-friend-request" type="submit" class="btn" 
+                                            style="background-color: #40c4e5; color: white;">Decline</button>
                                     </form>
                                 </div>
                                 {{/each}}
