@@ -70,6 +70,11 @@ nav a {
   color: white;
 }
 
+.nav-image {
+  width: 50px;
+  height: 50px;
+}
+
 footer {
   height: 40px;
   font-size: 16px;
@@ -104,18 +109,19 @@ footer {
   border: 3px solid rgb(150, 38, 160);
   border-radius: 30px;
   font-size: 20px;
-  
 }
 
 .pink-button {
+  background-color: rgb(236, 122, 247);
+  border: 3px solid rgb(150, 38, 160);
+  border-radius: 30px;
+  font-size: 20px;
+}
+
+.pink-button:hover {
   background-color: rgb(150, 38, 160);
   border: 3px solid rgb(236, 122, 247);
-  border-radius: 10px;
   color: white;
-  width: 300px;
-  margin: 20px auto;
-  padding: 15px 20px;
-  font-size: 25px;
 }
 
 #image-selector::file-selector-button:hover, #image-selector::file-selector-button:active {
@@ -391,8 +397,8 @@ hr.post-hr{
   }
 
   input#image-selector{
-    width: 700px;
-    padding: 0 20%;
+    /* width: 700px;
+    padding: 0 20%; */
   }
 
   div.post{
@@ -418,22 +424,84 @@ hr.post-hr{
 }
 
 #image-selector::file-selector-button {
-  padding: 3px 22px;
-  margin: 5px 10px 5px 15px;
+  /* padding: 3px 22px;
+  margin: 5px 10px 5px 15px; */
 }
 }
 
 @media (min-width:920px){
   
-  /* .home-paragraph{
-    padding:10px 125px;
-  } */
-  
   .form-login {
     width: 30%;
   }
-
-  
-  
 }
+
+/* ACCOUNT PAGE */
+
+#image-selector {
+  font-size: 0pt;
+}
+
+.account-settings .user-profile {
+  margin: 0 0 1rem 0;
+  padding-bottom: 1rem;
+  text-align: center;
+}
+.account-settings .user-profile .user-avatar {
+  margin: 0 0 1rem 0;
+}
+.account-settings .user-profile .user-avatar img {
+  width: 90px;
+  height: 90px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  border-radius: 100px;
+}
+.account-settings .user-profile h5.user-name {
+  margin: 0 0 0.5rem 0;
+  font-size: 2.25rem;
+  color: #a8d5fa;
+}
+.account-settings .user-profile h6.user-email {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #cdd5e4;
+}
+.account-settings .about {
+  margin: 2rem 0 0 0;
+  text-align: center;
+}
+
+.account-settings .about p {
+  font-size: 0.825rem;
+}
+
+.bg-overlay-thing {
+  background: linear-gradient(rgba(255, 255, 255, 0.554), rgba(255, 255, 255, 0.554)),  url("../images/account-page-bg.png");
+}
+
+.card {
+  /* background: linear-gradient(rgba(255, 255, 255, 0.554), rgba(255, 255, 255, 0.554)),  url("../images/account-page-bg.png"); */
+  background-image: url("../images/account-page-bg.png");
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 25px;
+  border: 0;
+  margin-bottom: 1rem;
+  padding-top: 50px;
+}
+
+.friends h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #a8d5fa;
+}
+
+.acc-container h1 {
+  font-family: 'Fredoka One', cursive;
+  color:rgb(94, 21, 101);
+}
+
 
