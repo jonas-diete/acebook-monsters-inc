@@ -380,60 +380,12 @@ hr.post-hr{
   padding-top: 100px;
 }
 
-@media (min-width:760px){
-  
-
-  
-  .form-login {
-    text-align: left;
-  }
-
-  input#message{
-    width:450px;
-  }
-
-  input#input-post, #comment-submit{
-    width:150px !important;
-  }
-
-  input#image-selector{
-    /* width: 700px;
-    padding: 0 20%; */
-  }
-
-  div.post{
-    width:700px;
-  }
-
-  .post-comment {
-    width: 657px;
-    padding-top: 5px;
+a.profile-link, a.public-name{
+  color: #0E5660;
 }
 
-#new-post-form{
-  width:700px;
-}
-
-.post-comment{
-  width:657px;
-  padding-top:5px;
-}
-
-.comment{
-  margin: 5px 50px;
-}
-
-#image-selector::file-selector-button {
-  /* padding: 3px 22px;
-  margin: 5px 10px 5px 15px; */
-}
-}
-
-@media (min-width:920px){
-  
-  .form-login {
-    width: 30%;
-  }
+a.profile-link:hover, a.public-name:hover{
+  color: darkblue;
 }
 
 /* ACCOUNT PAGE */
@@ -505,3 +457,59 @@ hr.post-hr{
 }
 
 
+
+@media (min-width:760px){
+  
+
+  
+  .form-login {
+    text-align: left;
+  }
+
+  input#message{
+    width:450px;
+  }
+
+  input#input-post, #comment-submit{
+    width:150px !important;
+  }
+
+  input#image-selector{
+    /* width: 700px;
+    padding: 0 20%; */
+  }
+
+  div.post{
+    width:700px;
+  }
+
+  .post-comment {
+    width: 657px;
+    padding-top: 5px;
+}
+
+#new-post-form{
+  width:700px;
+}
+
+.post-comment{
+  width:657px;
+  padding-top:5px;
+}
+
+.comment{
+  margin: 5px 50px;
+}
+
+#image-selector::file-selector-button {
+  /* padding: 3px 22px;
+  margin: 5px 10px 5px 15px; */
+}
+}
+
+@media (min-width:920px){
+  
+  .form-login {
+    width: 30%;
+  }
+}
