@@ -1,96 +1,116 @@
-<div>
+<div class="acc-container">
+    <h1>{{currentAccount.name}}'s Account</h1>
+    <div class="row gutters">
+        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+            <div class="account card h-100">
+                <div class="card-body">
+                    <div class="account-settings">
+                        <div class="user-profile">
+                            <div class="user-avatar">
+                                <img src="{{session.user.photo_link}}"
+                                    alt="profile_picture">
+                            </div>
 
-  <h1>{{currentAccount.name}}'s Account</h1>
-  <div class="account">
-     {{#if isNoFriend}}
-    <form method="POST" action="/users/request-friend">
-      <input id="friend_id" type="hidden" value="{{currentAccount._id}}"
-        name="friend_id">
-      <button id="friend-request-btn" type="submit" class="btn" 
-        style="background-color: #40c4e5; color: white;">Add Friend</button>
-    </form>
-    {{/if}}
-    <br>
-    <h3>Friends List:</h3>
-    {{#each currentAccount.friends}}
-      <div>
-          <a class="friend" href="/users/{{this.id}}" >{{this.name}}</a>
-      </div>
-    {{/each}}  
-    <div class="form-post-image">
-      <form id="new-post-form" action="/posts/create/{{currentAccount._id}}" method="post" enctype="multipart/form-data">
-        <div id="message-container"><label for="message">Write something for {{currentAccount.name}}?</label></div>
-        <div><input id="message" type="text" name="message" >
-        <input id="input-post" type="submit" value="Post"></div>
-        <div>
-          <input id="image-selector" type="file" name="image" value="Post" accept=".png, .jpeg, .jpg, .gif">
+                            <h5 class="user-name" id="account-name">{{currentAccount.name}}</h5>
+                            <h6 class="user-email">{{currentAccount.email}}</h6>
+                        </div>
+                        <div class="friends">
+                              {{#if isNoFriend}}
+                              <form method="POST" action="/users/request-friend">
+                                <input id="friend_id" type="hidden" value="{{currentAccount._id}}"
+                                  name="friend_id">
+                                <button id="friend-request-btn" type="submit" class="btn" 
+                                  style="background-color: #40c4e5; color: white;">Add Friend</button>
+                              </form>
+                              {{/if}}
+                              <br>
+                              <h3>Friends List:</h3>
+                              {{#each currentAccount.friends}}
+                                <div>
+                                    <a class="friend" href="/users/{{this.id}}" >{{this.name}}</a>
+                                </div>
+                              {{/each}}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </form>
-    </div>
-    <div class="posts">
-      {{#each posts}}
-      <div class="post">
-        <div class="post-header">
-          <img class="profile_picture" src="{{this.photo_link}}" alt="profile_picture">
-          <a class="public-name" href="/users/{{this.user_id}}">{{this.name}}</a> - {{this.date_string}}
-        </div>
-        {{#if this.image}}
-          <img src="{{this.image}}" class="postImage" alt="">
-        {{/if}}
-        <hr class="post-hr">
-        <div class="post-message">
-          
-          <!-- Bootstrap grid system -->
-          <div class="container">
-            <div class="row">
-              <div class="col-10 col-sm-11">
-                <!-- create a like button and the number of likes -->
-                <form method="POST" action="/posts/like">
-                  <input type="hidden" value="{{this._id}}" name="postId">
-                  <input type="hidden" value="{{../session.user._id}}" name="userId">
-                  {{this.message}}
-                  <input type="submit" value="" id="like-button">
-                  {{#if this.likes}}
-                  <span id="like-number">{{this.likes.length}}</span>
-                  {{/if}}
-                </form>
-              </div>
-              <div class="col-1">
-                {{#if this.owner}}
-                  <!-- Delete a post -->
-                  <form id="delete-post-form" action="/posts/delete/{{this._id}}" method="post">
-                    <input id="delete-button-post" type="image" src="../images/trash_can.webp" alt="Delete image">
-                  </form>
+        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+            {{#each posts}}
+            <div class="post">
+                <div class="post-header bg-overlay-thing">
+                    <img class="profile_picture"
+                        src="{{this.photo_link}}"
+                        alt="profile_picture">
+                    {{this.name}} - {{this.date_string}}
+                </div>
+                {{#if this.image}}
+                <img src="{{this.image}}" class="postImage" alt="">
                 {{/if}}
-              </div>
+                <hr class="post-hr">
+                <div class="post-message">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-10 col-sm-11">
+                                <!-- create a like button and the number of likes -->
+                                <form method="POST"
+                                    action="/posts/like">
+                                    <input type="hidden"
+                                        value="{{this._id}}"
+                                        name="postId">
+                                    <input type="hidden"
+                                        value="{{../session.user._id}}"
+                                        name="userId">
+                                    {{this.message}}
+                                    <input type="submit" value=""
+                                        id="like-button">
+                                    {{#if this.likes}}
+                                    <span id="like-number">{{this.likes.length}}</span>
+                                    {{/if}}
+                                </form>
+                            </div>
+                            <div class="col-1">
+                                {{#if this.owner}}
+                                <!-- Delete a post -->
+                                <form id="delete-post-form"
+                                    action="/posts/delete/{{this._id}}"
+                                    method="post">
+                                    <input id="delete-button-post"
+                                        type="image"
+                                        src="../images/trash_can.webp"
+                                        alt="Delete image">
+                                </form>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{#each this.comments}}
+                <div class="container post-comment">
+                    <div class="row">
+                        <div class="col-10 col-sm-11">
+                            <div class="comment">{{this.name}} -
+                                {{this.message}} - {{this.createdAt}}</div>
+                        </div>
+                        <div class="col-1" style="margin-left: -5px;">
+                            {{#if this.comment_owner}}
+                            <!-- Delete a comment -->
+                            <form id="delete-comment-form"
+                                action="/posts/comment/delete/{{this.post_id}}/{{this._id}}"
+                                method="post">
+                                <input id="delete-button-comment"
+                                    type="image"
+                                    src="../images/trash_can.webp"
+                                    alt="Delete
+                                    image">
+                            </form>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
             </div>
-          </div>
-        </div> 
-        <!-- create a comment on the post -->
-        <form id="new-comment-form" action="/posts/{{this._id}}" method="post">
-          <input id="message" type="text" name="message" placeholder="Comment here">
-          <input id="comment-submit" type="submit" value="Submit">
-        </form>
-        
-        {{#each this.comments}}
-        <!-- Bootstrap grid system -->
-        <div class="container post-comment">
-          <div class="row">
-            <div class="col-10 col-sm-11">
-              <div class="comment">{{this.name}} - {{this.message}} - {{this.createdAt}}</div>
-            </div>
-            <div class="col-1">
-              {{#if this.comment_owner}}
-                <!-- Delete a comment -->
-                <form id="delete-comment-form" action="/posts/comment/delete/{{this.post_id}}/{{this._id}}" method="post">
-                  <input id="delete-button-comment" type="image" src="../images/trash_can.webp" alt="Delete image">
-                </form>
-              {{/if}}
-            </div>
-          </div>
+            {{/each}}
         </div>
-        {{/each}} 
-      </div>
-      {{/each}}
     </div>
-  </div>
+</div>
