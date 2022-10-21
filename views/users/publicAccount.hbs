@@ -30,8 +30,8 @@
     <div class="posts">
       {{#each posts}}
       <div class="post">
-        <div class="post-header">
-          <img class="profile-picture" src="{{this.photoLink}}" alt="profile-picture">
+        <div class="post-header bg-overlay-thing">
+          <img class="profile-picture" src="{{this.photoLink}}" alt="profile picture">
           <a class="public-name" href="/users/{{this.userId}}">{{this.name}}</a> - {{this.dateString}}
         </div>
         {{#if this.image}}

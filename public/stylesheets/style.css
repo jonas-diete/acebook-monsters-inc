@@ -380,46 +380,12 @@ hr.post-hr{
   padding-top: 100px;
 }
 
-@media (min-width:760px){
-  .form-login {
-    text-align: left;
-  }
-
-  input#message{
-    width:450px;
-  }
-
-  input#input-post, #comment-submit{
-    width:150px !important;
-  }
-
-  div.post{
-    width:700px;
-  }
-
-  .post-comment {
-    width: 657px;
-    padding-top: 5px;
-  }
-
-  #new-post-form{
-    width:700px;
-  }
-
-  .post-comment{
-    width:657px;
-    padding-top:5px;
-  }
-
-  .comment{
-    margin: 5px 50px;
-  }
+a.profile-link, a.public-name{
+  color: #0E5660;
 }
 
-@media (min-width:920px){
-  .form-login {
-    width: 30%;
-  }
+a.profile-link:hover, a.public-name:hover{
+  color: darkblue;
 }
 
 /* ACCOUNT PAGE */
@@ -490,3 +456,46 @@ hr.post-hr{
 }
 
 
+
+@media (min-width:760px){
+  .form-login {
+    text-align: left;
+  }
+
+  input#message{
+    width:450px;
+  }
+
+  input#input-post, #comment-submit{
+    width:150px !important;
+  }
+
+  div.post{
+    width:700px;
+  }
+
+  .post-comment {
+    width: 657px;
+    padding-top: 5px;
+  }
+
+  #new-post-form{
+    width:700px;
+  }
+
+  .post-comment{
+    width:657px;
+    padding-top:5px;
+  }
+
+  .comment{
+    margin: 5px 50px;
+  }
+}
+
+@media (min-width:920px){
+  
+  .form-login {
+    width: 30%;
+  }
+}
