@@ -30,19 +30,18 @@ const UsersController = {
   },
 
   ProfileIndex: (req, res) => {
-    Post.find({ posted_on: req.session.user._id }, (err, posts) => {
+    Post.find({ postedOn: req.session.user._id }, (err, posts) => {
       if (err) {
         throw err;
       }
       posts.forEach((post) => {
-        post.owner = req.session.user._id == post.user_id;
+        post.owner = req.session.user._id == post.userId;
         post.comments.forEach((comment) => {
-          comment.comment_owner = req.session.user._id == comment.user_id;
+          comment.commentOwner = req.session.user._id == comment.userId;
         });
       });
 
       let notRequestedFriendship = true;
-      console.log(req.session.user.friendRequests.length);
       if (req.session.user.friendRequests.length == 0) {
         notRequestedFriendship = false;
       }
@@ -60,14 +59,14 @@ const UsersController = {
     if (req.params.id == req.session.user._id) {
       res.status(201).redirect("/users/account");
     }
-    Post.find({ posted_on: req.params.id }, (err, posts) => {
+    Post.find({ postedOn: req.params.id }, (err, posts) => {
       if (err) {
         throw err;
       }
       posts.forEach((post) => {
-        post.owner = req.session.user._id == post.user_id;
+        post.owner = req.session.user._id == post.userId;
         post.comments.forEach((comment) => {
-          comment.comment_owner = req.session.user._id == comment.user_id;
+          comment.commentOwner = req.session.user._id == comment.userId;
         });
       });
       User.findById(req.params.id, (err, user) => {
@@ -102,12 +101,12 @@ const UsersController = {
     // find a user by id in mongodb
     User.findById(req.session.user._id, (err, user) => {
       // change the image property of the user in database and session
-      user.photo_link = `/images/${req.file.filename}`;
-      req.session.user.photo_link = `/images/${req.file.filename}`;
+      user.photoLink = `/images/${req.file.filename}`;
+      req.session.user.photoLink = `/images/${req.file.filename}`;
       // find and change the image property of all posts by that user
-      Post.find({ user_id: req.session.user._id }, (err, posts) => {
+      Post.find({ userId: req.session.user._id }, (err, posts) => {
         posts.forEach((post) => {
-          post.photo_link = `/images/${req.file.filename}`;
+          post.photoLink = `/images/${req.file.filename}`;
           post.save((err) => {
             if (err) {
               throw err;
@@ -140,7 +139,7 @@ const UsersController = {
     res.status(201).redirect("/users/" + req.body.friend_id);
   },
 
-  // assumes we are getting the id of the user who we want to be friends with as req.body.user_id
+  // assumes we are getting the id of the user who we want to be friends with as req.body.userId
   AddFriend: (req, res) => {
     // Saving our id into our new friend's friend-array
     User.findById(req.body.friend_id, (err, user) => {

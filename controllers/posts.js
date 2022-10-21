@@ -3,21 +3,21 @@ const Comment = require("../models/comment");
 
 const PostsController = {
   Index: (req, res) => {
-    Post.find({ $expr: { $eq: ["$posted_on", "$user_id"] } }, (err, posts) => {
+    Post.find({ $expr: { $eq: ["$postedOn", "$userId"] } }, (err, posts) => {
       if (err) {
         throw err;
       }
 
       posts.forEach((post) => {
-        post.owner = req.session.user._id == post.user_id;
+        post.owner = req.session.user._id == post.userId;
         post.isProfileFriend = false
         for (let i = 0; i < req.session.user.friends.length; i++){
-          if (req.session.user.friends[i].id == post.user_id){
+          if (req.session.user.friends[i].id == post.userId){
             post.isProfileFriend = true     
           } 
         }
         post.comments.forEach((comment) => {
-          comment.comment_owner = req.session.user._id == comment.user_id;
+          comment.commentOwner = req.session.user._id == comment.userId;
         });
       });
 
@@ -32,13 +32,13 @@ const PostsController = {
     const post = new Post();
     post.name = req.session.user.name;
     post.message = req.body.message;
-    post.photo_link = req.session.user.photo_link;
-    post.user_id = req.session.user._id;
+    post.photoLink = req.session.user.photoLink;
+    post.userId = req.session.user._id;
 
     if (req.params.id) {
-      post.posted_on = req.params.id;
+      post.postedOn = req.params.id;
     } else {
-      post.posted_on = req.session.user._id;
+      post.postedOn = req.session.user._id;
     }
 
     if (req.file) {
@@ -46,7 +46,7 @@ const PostsController = {
     }
 
     const date = new Date();
-    post.date_string = `${date.getDate()}-${
+    post.dateString = `${date.getDate()}-${
       date.getMonth() + 1
     }-${date.getFullYear()} ${date.toLocaleTimeString()}`;
     post.save((err) => {
@@ -58,9 +58,6 @@ const PostsController = {
     });
   },
   Like: (req, res) => {
-    console.log(req.body.userId);
-    console.log(req.body.postId);
-
     Post.findById(req.body.postId, (err, post) => {
       if (err) {
         throw err;
@@ -98,8 +95,8 @@ const PostsController = {
       comment.createdAt = `${date.getDate()}-${
         date.getMonth() + 1
       }-${date.getFullYear()} ${date.toLocaleTimeString()}`;
-      comment.user_id = req.session.user._id;
-      comment.post_id = req.params.id;
+      comment.userId = req.session.user._id;
+      comment.postId = req.params.id;
       post.comments.unshift(comment);
       post.save((err) => {
         if (err) {
