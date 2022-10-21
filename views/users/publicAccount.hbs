@@ -53,10 +53,8 @@
       {{#each posts}}
       <div class="post">
         <div class="post-header bg-overlay-thing">
-          <img class="profile_picture"
-            src="{{this.photo_link}}"
-            alt="profile_picture">
-          {{this.name}} - {{this.date_string}}
+          <img class="profile_picture" src="{{this.photo_link}}" alt="profile_picture">
+          <a class="public-name" href="/users/{{this.user_id}}">{{this.name}}</a> - {{this.date_string}}
         </div>
         {{#if this.image}}
         <img src="{{this.image}}" class="postImage" alt="">
@@ -99,30 +97,29 @@
             </div>
           </div>
         </div>
-        {{#each this.comments}}
-        <div class="container post-comment">
-          <div class="row">
-            <div class="col-10 col-sm-11">
-              <div class="comment">{{this.name}} -
-                {{this.message}} - {{this.createdAt}}</div>
-            </div>
-            <div class="col-1" style="margin-left: -5px;">
-              {{#if this.comment_owner}}
+    <!-- create a comment on the post -->
+    <form id="new-comment-form" action="/posts/{{this._id}}" method="post">
+      <input id="message" type="text" name="message" placeholder="Comment here">
+      <input id="comment-submit" type="submit" value="Submit">
+    </form>
+    {{#each this.comments}}
+      <!-- Bootstrap grid system -->
+      <div class="container post-comment">
+        <div class="row">
+          <div class="col-10 col-sm-11">
+            <div class="comment">{{this.name}} - {{this.message}} - {{this.createdAt}}</div>
+          </div>
+          <div class="col-1">
+            {{#if this.comment_owner}}
               <!-- Delete a comment -->
-              <form id="delete-comment-form"
-                action="/posts/comment/delete/{{this.post_id}}/{{this._id}}"
-                method="post">
-                <input id="delete-button-comment"
-                  type="image"
-                  src="../images/trash_can.webp"
-                  alt="Delete
-                  image">
+              <form id="delete-comment-form" action="/posts/comment/delete/{{this.post_id}}/{{this._id}}" method="post">
+                <input id="delete-button-comment" type="image" src="../images/trash_can.webp" alt="Delete image">
               </form>
-              {{/if}}
-            </div>
+            {{/if}}
           </div>
         </div>
-        {{/each}}
+      </div>
+      {{/each}} 
       </div>
       {{/each}}
     </div>
