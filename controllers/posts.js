@@ -16,7 +16,6 @@ const PostsController = {
             post.isProfileFriend = true     
           } 
         }
-        //Asdf1234!
         post.comments.forEach((comment) => {
           comment.comment_owner = req.session.user._id == comment.user_id;
         });
