@@ -19,7 +19,7 @@ app.set("port", port);
 /**
  * Connect to MongoDB
  **/
-const password = encodeURIComponent("15081922");
+const password = encodeURIComponent("//");
 var mongoDbUrl = process.env.MONGODB_URL || `mongodb+srv://makers:${password}@learning.vltc2du.mongodb.net/?retryWrites=true&w=majority`;
 mongoose.connect(mongoDbUrl, {
   useNewUrlParser: true,

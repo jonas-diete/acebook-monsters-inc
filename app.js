@@ -66,7 +66,7 @@ const sessionChecker = (req, res, next) => {
 app.use(bodyParser.json());
 
 // Mongo URI test or development
-const password = encodeURIComponent("15081922");
+const password = encodeURIComponent("//");
 
 const mongoDbUrl = process.env.MONGODB_URL || `mongodb+srv://makers:${password}@learning.vltc2du.mongodb.net/?retryWrites=true&w=majority`;
 const conn = mongoose.createConnection(mongoDbUrl);
