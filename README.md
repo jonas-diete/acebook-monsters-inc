@@ -21,7 +21,7 @@ We worked together using Agile workflows - we created tickets and assigned them 
 https://trello.com/b/TEgHXan1/monsters-inc-project
 
 ## Try it!
-Here is the live link - sign up as a new user and post something on the wall!
+Here is the live link - sign up as a new user and post something on the wall!  
 https://acebook-monsters-inc.herokuapp.com/
 
 ## If you want to run the app on your computer, download this repo and follow these instructions:
