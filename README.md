@@ -5,6 +5,10 @@ It was a team project during the Makers Coding Bootcamp.
 
 Created by [Guillermina Lorenzo](https://github.com/GuillerminaLorenzo), [James Ruffini](https://github.com/iniffur), [Jonas Diete](https://github.com/jonas-diete), [Liovirgilda Mendonca](https://github.com/liovirgildam), [Millennia Severino](https://github.com/MillieKS) and [Thomas Mannion](https://github.com/TomMannion).
 
+<img src="./public/images/screenshot1.jpg" alt="login screen" width="700"/>
+<br><br>
+<img src="./public/images/screenshot2.jpg" alt="home screen" width="700"/>
+
 It uses:
 
 - [Express](https://expressjs.com/) web framework for Node.js.
