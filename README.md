@@ -31,9 +31,9 @@ https://monsters-inc-acebook.herokuapp.com/
 ## Design & Database overview
 On the first day, we created a design document and agreed on our database architecture. We then referred back to these documents throughout the project to ensure consistency across the team.
 
-<img src="./public/images/design-document.png" alt="login screen" width="700"/>
-<br><br>
 <img src="./public/images/database-overview.png" alt="home screen" width="700"/>
+<br>
+<img src="./public/images/design-document.png" alt="login screen" width="700"/>
 
 ## If you want to run the app on your computer, download this repo and follow these instructions:
 
